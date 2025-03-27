@@ -83,17 +83,10 @@ namespace Controller
             SetInput(axis, target, isRun, false);  // false means not jumping here
 
 
-            m_Movement.Move(Time.deltaTime, in m_Axis, in m_Target, m_IsRun, m_IsMoving, out var animAxis, out var isAir);
+            m_Movement.Move(Time.deltaTime, in m_Axis, m_IsRun, out var animAxis, out var isAir);
             m_Animation.Animate(in animAxis, m_IsRun ? 1f : 0f, Time.deltaTime);
 
-            if (Input.GetKey(KeyCode.W))
-            {
-                m_Animator.Play("Walk");
-            }
-            else
-            {
-                m_Animator.Play("Idle");
-            }
+            
         }
 
         private void OnAnimatorIK()
@@ -101,7 +94,7 @@ namespace Controller
             m_Animation.AnimateIK(in m_Target, m_LookWeight);
         }
 
-        public void SetInput(in Vector2 axis, in Vector3 target, in bool isRun, in bool isJump)
+        public void SetInput(Vector2 axis, Vector3 target, bool isRun, bool isJump)
         {
             m_Axis = axis;
             m_Target = target;
@@ -110,7 +103,7 @@ namespace Controller
             if (m_Axis.sqrMagnitude > Mathf.Epsilon) // Check if there's movement input
             {
                 // Convert movement input to world direction
-                Vector3 movementDirection = new Vector3(m_Axis.x, 0f, m_Axis.y).normalized;
+                //Vector3 movementDirection = new Vector3(m_Axis.x, 0f, m_Axis.y).normalized;
                 m_IsMoving = true;
             }
             else
@@ -118,8 +111,8 @@ namespace Controller
                 m_IsMoving = false;
                 m_Target = Vector3.zero;
 
-                transform.rotation = Quaternion.LookRotation(transform.forward);
-                transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+                //transform.rotation = Quaternion.LookRotation(transform.forward);
+                //transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
             }
 
             //m_Axis = axis;
@@ -207,26 +200,33 @@ namespace Controller
                 m_Space = space;
             }
 
-            public void SetSurface(in Vector3 normal)
+            public void SetSurface(Vector3 normal)
             {
                 m_Normal = normal;
             }
 
-            public void Move(float deltaTime, in Vector2 axis, in Vector3 target, bool isRun, bool isMoving, out Vector2 animAxis, out bool isAir)
+            public void Move(float deltaTime, in Vector2 axis, bool isRun, out Vector2 animAxis, out bool isAir)
             {
-                var cameraLook = Vector3.Normalize(target - m_Transform.position);
 
-                ConvertMovement(in axis, in cameraLook, out var movement);
+                Vector3 inputDirection = new Vector3(axis.x, 0f, axis.y).normalized;
 
-                if (movement.sqrMagnitude > 0.01f)
+                if (inputDirection.sqrMagnitude > 0.01f)
                 {
-                    Turn(movement.normalized, deltaTime);
+                    Quaternion targetRotation = Quaternion.LookRotation(inputDirection, Vector3.up);
+                    m_Transform.rotation = Quaternion.Slerp(m_Transform.rotation, targetRotation, deltaTime * m_RotateSpeed);
                 }
 
-                CaculateGravity(deltaTime, out isAir);
-                Displace(deltaTime, in movement, isRun);
+                float speed = isRun ? m_RunSpeed : m_WalkSpeed;
+                Vector3 velocity = inputDirection * speed;
 
-                GenAnimationAxis(in movement, out animAxis);
+                CaculateGravity(deltaTime, out isAir);
+                //Displace(deltaTime, in movement, isRun);
+
+                m_Controller.Move(velocity * deltaTime);
+
+                //GenAnimationAxis(in movement, out animAxis);
+                animAxis = new Vector2(inputDirection.x, inputDirection.z);
+
             }
 
             private void ConvertMovement(in Vector2 axis, in Vector3 targetForward, out Vector3 movement)
@@ -260,20 +260,30 @@ namespace Controller
 
             private void CaculateGravity(float deltaTime, out bool isAir)
             {
-                m_jumpTimer = Mathf.Max(m_jumpTimer - deltaTime, 0f);
-
                 if (m_Controller.isGrounded)
                 {
-                    m_GravityAcelleration = Physics.gravity;
+                    m_GravityAcelleration = Physics.gravity; // Reset gravity
                     isAir = false;
-
-                    return;
                 }
+                else
+                {
+                    isAir = true;
+                    m_GravityAcelleration += Physics.gravity * deltaTime; // Apply gravity over time
+                }
+                //m_jumpTimer = Mathf.Max(m_jumpTimer - deltaTime, 0f);
 
-                isAir = true;
+                //if (m_Controller.isGrounded)
+                //{
+                //    m_GravityAcelleration = Physics.gravity;
+                //    isAir = false;
 
-                m_GravityAcelleration += Physics.gravity * deltaTime;
-                return;
+                //    return;
+                //}
+
+                //isAir = true;
+
+                //m_GravityAcelleration += Physics.gravity * deltaTime;
+                //return;
             }
 
             private void GenAnimationAxis(in Vector3 movement, out Vector2 animAxis)
@@ -288,7 +298,7 @@ namespace Controller
                 }
             }
 
-            public void Turn(Vector3 targetForward, float deltaTime)
+            public void Turn(Vector3 targetForward, float deltaTime, bool isRunning)
             {
                 if (targetForward.sqrMagnitude < 0.01f)
                 {
@@ -297,8 +307,30 @@ namespace Controller
 
                 // Get the target rotation
                 Quaternion targetRotation = Quaternion.LookRotation(targetForward, Vector3.up);
+                float angle = Quaternion.Angle(m_Transform.rotation, targetRotation);
 
-                m_Transform.rotation = Quaternion.Slerp(m_Transform.rotation, targetRotation, deltaTime * 10f);
+                //m_Transform.rotation = Quaternion.Slerp(m_Transform.rotation, targetRotation, deltaTime * 10f);
+
+                //if (angle > 90f) // Adjust threshold if needed
+                //{
+                //    m_Transform.rotation = targetRotation;
+                //}
+                //else
+                //{
+                //    m_Transform.rotation = Quaternion.Slerp(m_Transform.rotation, targetRotation, deltaTime * 10f);
+                //}
+
+                if (isRunning && angle > 120f)
+                {
+                    // Snap instantly — avoids spinning lag
+                    m_Transform.rotation = targetRotation;
+                }
+                else
+                {
+                    // Smooth rotate — looks natural
+                    float rotationSpeed = isRunning ? 15f : 10f;
+                    m_Transform.rotation = Quaternion.Slerp(m_Transform.rotation, targetRotation, deltaTime * rotationSpeed);
+                }
             }
         }
          private class AnimationHandler
@@ -329,7 +361,7 @@ namespace Controller
                 m_FlowState = Mathf.Clamp01(m_FlowState + k_InputFlow * deltaTime * Mathf.Sign(state - m_FlowState));
             }
 
-            public void AnimateIK(in Vector3 target, in LookWeight lookWeight)
+            public void AnimateIK(in Vector3 target, LookWeight lookWeight)
             {
                 m_Animator.SetLookAtPosition(target);
                 m_Animator.SetLookAtWeight(lookWeight.weight, lookWeight.body, lookWeight.head, lookWeight.eyes);
