@@ -1,4 +1,6 @@
 using System;
+using System.Threading;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 
@@ -44,6 +46,9 @@ namespace Controller
 
         private bool m_IsMoving;
 
+        public TextMeshProUGUI ammoText;
+        private int count;
+
         public Vector2 Axis => m_Axis;
         public Vector3 Target => m_Target;
         public bool IsRun => m_IsRun;
@@ -65,6 +70,11 @@ namespace Controller
             m_Movement = new MovementHandler(m_Controller, m_Transform, m_WalkSpeed, m_RunSpeed, m_RotateSpeed, m_JumpHeight, m_Space);
             m_Animation = new AnimationHandler(m_Animator, m_VerticalID, m_StateID);
         }
+
+        //private void Start()
+        //{
+        //    SetAmmoText();
+        //}
 
         private void Update()
         {
@@ -106,8 +116,6 @@ namespace Controller
 
             if (m_Axis.sqrMagnitude > Mathf.Epsilon) // Check if there's movement input
             {
-                // Convert movement input to world direction
-                //Vector3 movementDirection = new Vector3(m_Axis.x, 0f, m_Axis.y).normalized;
                 m_IsMoving = true;
             }
             else
@@ -126,6 +134,21 @@ namespace Controller
                 m_Movement.SetSurface(hit.normal);
             }
         }
+
+        //private void OnTriggerEnter(Collider other)
+        //{
+        //    if (other.CompareTag("Ammo"))
+        //    {
+        //        count++;
+        //        SetAmmoText();
+        //        Destroy(other.gameObject);
+        //    }
+        //}
+
+        //void SetAmmoText()//to be continued...
+        //{
+        //    ammoText.text = $"Ammo: {count.ToString()}";
+        //}
 
         [Serializable]
         private struct LookWeight
@@ -219,41 +242,11 @@ namespace Controller
 
             }
 
-            //private void ConvertMovement(in Vector2 axis, in Vector3 targetForward, out Vector3 movement)
-            //{
-            //    Vector3 forward;
-            //    Vector3 right;
-
-            //    if (m_Space == Space.Self)
-            //    {
-            //        forward = new Vector3(-targetForward.x, 0f, -targetForward.z).normalized;
-            //        right = Vector3.Cross(Vector3.up, forward).normalized;
-            //    }
-            //    else
-            //    {
-            //        forward = Vector3.forward;
-            //        right = Vector3.right;
-            //    }
-
-            //    movement = axis.x * right + axis.y * forward;
-            //    movement = Vector3.ProjectOnPlane(movement, m_Normal);
-            //}
-
-            //private void Displace(float deltaTime, in Vector3 movement, bool isRun)
-            //{
-            //    Vector3 displacement = (isRun ? m_RunSpeed : m_WalkSpeed) * movement;
-            //    displacement += m_GravityAcelleration;
-            //    displacement *= deltaTime;
-
-            //    m_Controller.Move(displacement);
-            //}
-
             private void CaculateGravity(float deltaTime, bool isJumping, out bool isAir)
             {
                 if (m_Controller.isGrounded)
                 {
                     m_GravityAcelleration.y = -0.5f;
-                    //m_GravityAcelleration = Physics.gravity; // Reset gravity
                     isAir = false;
 
                     if (isJumping)
@@ -268,32 +261,7 @@ namespace Controller
                     m_GravityAcelleration.y += Physics.gravity.y * deltaTime; // Apply gravity over time
                 }
                 m_jumpTimer = Mathf.Max(m_jumpTimer - deltaTime, 0f);
-
-                //if (m_Controller.isGrounded)
-                //{
-                //    m_GravityAcelleration = Physics.gravity;
-                //    isAir = false;
-
-                //    return;
-                //}
-
-                //isAir = true;
-
-                //m_GravityAcelleration += Physics.gravity * deltaTime;
-                //return;
             }
-
-            //private void GenAnimationAxis(in Vector3 movement, out Vector2 animAxis)
-            //{
-            //    if (m_Space == Space.Self)
-            //    {
-            //        animAxis = new Vector2(Vector3.Dot(movement, m_Transform.right), Vector3.Dot(movement, m_Transform.forward));
-            //    }
-            //    else
-            //    {
-            //        animAxis = new Vector2(Vector3.Dot(movement, Vector3.right), Vector3.Dot(movement, Vector3.forward));
-            //    }
-            //}
 
             public void Turn(Vector3 targetForward, float deltaTime, bool isRunning)
             {
