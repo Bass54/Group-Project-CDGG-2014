@@ -785,11 +785,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45c5f86e3afaf7c4cb4577776cca4830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_WalkSpeed: 1
-  m_RunSpeed: 2
+  m_WalkSpeed: 2
+  m_RunSpeed: 4
   m_RotateSpeed: 90
   m_Space: 1
   m_JumpHeight: 5
+  m_IsJumping: 0
   m_VerticalID: Vert
   m_StateID: State
   m_LookWeight:
