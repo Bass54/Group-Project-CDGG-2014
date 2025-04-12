@@ -762,7 +762,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4775980303648029407}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1817d95a9999d3e4490057a8631d1447, type: 3}
+  m_Script: {fileID: 11500000, guid: e95e2f5ca28df2b49a3586e87f3e041f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_HorizontalAxis: Horizontal
@@ -790,6 +790,7 @@ MonoBehaviour:
   m_RotateSpeed: 90
   m_Space: 1
   m_JumpHeight: 5
+  m_IsJumping: 0
   m_VerticalID: Vert
   m_StateID: State
   m_LookWeight:
