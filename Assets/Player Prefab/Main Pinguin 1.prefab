@@ -697,8 +697,7 @@ GameObject:
   - component: {fileID: 9087052308418503671}
   - component: {fileID: 7417255119736299539}
   - component: {fileID: 1144821045977317565}
-  - component: {fileID: 4852451414128510928}
-  - component: {fileID: 8542242268577601418}
+  - component: {fileID: 2143084671945571195}
   m_Layer: 0
   m_Name: Main Pinguin 1
   m_TagString: Player
@@ -837,7 +836,6 @@ MonoBehaviour:
   m_RotateSpeed: 110
   m_Space: 1
   m_JumpHeight: 5
-  m_IsJumping: 0
   m_VerticalID: Vert
   m_StateID: State
   m_LookWeight:
@@ -845,7 +843,7 @@ MonoBehaviour:
     body: 0.3
     head: 0.7
     eyes: 1
---- !u!114 &4852451414128510928
+--- !u!114 &2143084671945571195
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -854,31 +852,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7294510087286410528}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be2f4aa750c530144bd7219a00354c98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_WalkSpeed: 1
-  m_RunSpeed: 4
-  m_RotateSpeed: 90
-  m_Space: 1
-  m_JumpHeight: 5
-  m_VerticalID: Vert
-  m_StateID: State
-  m_LookWeight:
-    weight: 1
-    body: 0.3
-    head: 0.7
-    eyes: 1
---- !u!114 &8542242268577601418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7294510087286410528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b2c67ce836140b4479603ebcf944cddd, type: 3}
+  m_Script: {fileID: 11500000, guid: e95e2f5ca28df2b49a3586e87f3e041f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_HorizontalAxis: Horizontal
