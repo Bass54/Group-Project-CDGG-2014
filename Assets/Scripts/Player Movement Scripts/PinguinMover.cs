@@ -20,8 +20,6 @@ namespace Controller
         private Space m_Space = Space.Self;
         [SerializeField]
         private float m_JumpHeight = 5f;
-        [SerializeField]
-        private bool m_IsJumping = false;
 
         [Header("Animator")]
         [SerializeField]
@@ -81,13 +79,11 @@ namespace Controller
             // Set whether the player is running (e.g., holding down Shift key)
             bool isRun = Input.GetKey(KeyCode.LeftShift);  // Run with Left Shift key
 
-            bool isJump = Input.GetKeyDown(KeyCode.Space);  // Jump with Space key
-
             // Pass the input to the CreatureMover component (this will handle movement)
-            SetInput(axis, target, isRun, isJump);  // false means not jumping here
+            SetInput(axis, target, isRun, false);  // false means not jumping here
 
 
-            m_Movement.Move(Time.deltaTime, in m_Axis, m_IsRun, m_IsJumping, out var animAxis, out var isAir);
+            m_Movement.Move(Time.deltaTime, in m_Axis, m_IsRun, out var animAxis, out var isAir);
             m_Animation.Animate(in animAxis, m_IsRun ? 1f : 0f, Time.deltaTime);
 
             
@@ -114,9 +110,25 @@ namespace Controller
             {
                 m_IsMoving = false;
                 m_Target = Vector3.zero;
+
+                //transform.rotation = Quaternion.LookRotation(transform.forward);
+                //transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
             }
 
-            m_IsJumping = isJump;
+            //m_Axis = axis;
+            //m_Target = target;
+            //m_IsRun = isRun;
+
+            //if (m_Axis.sqrMagnitude < Mathf.Epsilon)
+            //{
+            //    m_Axis = Vector2.zero;
+            //    m_IsMoving = false;
+            //}
+            //else
+            //{
+            //    m_Axis = Vector3.ClampMagnitude(m_Axis, 1f);
+            //    m_IsMoving = true;
+            //}
         }
 
         private void OnControllerColliderHit(ControllerColliderHit hit)
@@ -163,7 +175,6 @@ namespace Controller
 
             private Vector3 m_Normal;
             private Vector3 m_GravityAcelleration = Physics.gravity;
-            private float m_JumpHeight = 5f;
 
             private float m_jumpTimer;
             private Vector3 m_LastForward;
@@ -176,7 +187,6 @@ namespace Controller
                 m_WalkSpeed = walkSpeed;
                 m_RunSpeed = runSpeed;
                 m_RotateSpeed = rotateSpeed;
-
 
                 m_Space = space;
             }
@@ -195,7 +205,7 @@ namespace Controller
                 m_Normal = normal;
             }
 
-            public void Move(float deltaTime, in Vector2 axis, bool isRun, bool isJumping, out Vector2 animAxis, out bool isAir)
+            public void Move(float deltaTime, in Vector2 axis, bool isRun, out Vector2 animAxis, out bool isAir)
             {
 
                 Vector3 inputDirection = new Vector3(axis.x, 0f, axis.y).normalized;
@@ -209,65 +219,58 @@ namespace Controller
                 float speed = isRun ? m_RunSpeed : m_WalkSpeed;
                 Vector3 velocity = inputDirection * speed;
 
-                CaculateGravity(deltaTime, isJumping, out isAir);
-
-                velocity.y = m_GravityAcelleration.y;
+                CaculateGravity(deltaTime, out isAir);
+                //Displace(deltaTime, in movement, isRun);
 
                 m_Controller.Move(velocity * deltaTime);
 
+                //GenAnimationAxis(in movement, out animAxis);
                 animAxis = new Vector2(inputDirection.x, inputDirection.z);
 
             }
 
-            //private void ConvertMovement(in Vector2 axis, in Vector3 targetForward, out Vector3 movement)
-            //{
-            //    Vector3 forward;
-            //    Vector3 right;
+            private void ConvertMovement(in Vector2 axis, in Vector3 targetForward, out Vector3 movement)
+            {
+                Vector3 forward;
+                Vector3 right;
 
-            //    if (m_Space == Space.Self)
-            //    {
-            //        forward = new Vector3(-targetForward.x, 0f, -targetForward.z).normalized;
-            //        right = Vector3.Cross(Vector3.up, forward).normalized;
-            //    }
-            //    else
-            //    {
-            //        forward = Vector3.forward;
-            //        right = Vector3.right;
-            //    }
+                if (m_Space == Space.Self)
+                {
+                    forward = new Vector3(-targetForward.x, 0f, -targetForward.z).normalized;
+                    right = Vector3.Cross(Vector3.up, forward).normalized;
+                }
+                else
+                {
+                    forward = Vector3.forward;
+                    right = Vector3.right;
+                }
 
-            //    movement = axis.x * right + axis.y * forward;
-            //    movement = Vector3.ProjectOnPlane(movement, m_Normal);
-            //}
+                movement = axis.x * right + axis.y * forward;
+                movement = Vector3.ProjectOnPlane(movement, m_Normal);
+            }
 
-            //private void Displace(float deltaTime, in Vector3 movement, bool isRun)
-            //{
-            //    Vector3 displacement = (isRun ? m_RunSpeed : m_WalkSpeed) * movement;
-            //    displacement += m_GravityAcelleration;
-            //    displacement *= deltaTime;
+            private void Displace(float deltaTime, in Vector3 movement, bool isRun)
+            {
+                Vector3 displacement = (isRun ? m_RunSpeed : m_WalkSpeed) * movement;
+                displacement += m_GravityAcelleration;
+                displacement *= deltaTime;
 
-            //    m_Controller.Move(displacement);
-            //}
+                m_Controller.Move(displacement);
+            }
 
-            private void CaculateGravity(float deltaTime, bool isJumping, out bool isAir)
+            private void CaculateGravity(float deltaTime, out bool isAir)
             {
                 if (m_Controller.isGrounded)
                 {
-                    m_GravityAcelleration.y = -0.5f;
-                    //m_GravityAcelleration = Physics.gravity; // Reset gravity
+                    m_GravityAcelleration = Physics.gravity; // Reset gravity
                     isAir = false;
-
-                    if (isJumping)
-                    {
-                        m_GravityAcelleration.y = m_JumpHeight; // Apply the jump force
-                        isJumping = false;
-                    }
                 }
                 else
                 {
                     isAir = true;
-                    m_GravityAcelleration.y += Physics.gravity.y * deltaTime; // Apply gravity over time
+                    m_GravityAcelleration += Physics.gravity * deltaTime; // Apply gravity over time
                 }
-                m_jumpTimer = Mathf.Max(m_jumpTimer - deltaTime, 0f);
+                //m_jumpTimer = Mathf.Max(m_jumpTimer - deltaTime, 0f);
 
                 //if (m_Controller.isGrounded)
                 //{
@@ -283,17 +286,17 @@ namespace Controller
                 //return;
             }
 
-            //private void GenAnimationAxis(in Vector3 movement, out Vector2 animAxis)
-            //{
-            //    if (m_Space == Space.Self)
-            //    {
-            //        animAxis = new Vector2(Vector3.Dot(movement, m_Transform.right), Vector3.Dot(movement, m_Transform.forward));
-            //    }
-            //    else
-            //    {
-            //        animAxis = new Vector2(Vector3.Dot(movement, Vector3.right), Vector3.Dot(movement, Vector3.forward));
-            //    }
-            //}
+            private void GenAnimationAxis(in Vector3 movement, out Vector2 animAxis)
+            {
+                if (m_Space == Space.Self)
+                {
+                    animAxis = new Vector2(Vector3.Dot(movement, m_Transform.right), Vector3.Dot(movement, m_Transform.forward));
+                }
+                else
+                {
+                    animAxis = new Vector2(Vector3.Dot(movement, Vector3.right), Vector3.Dot(movement, Vector3.forward));
+                }
+            }
 
             public void Turn(Vector3 targetForward, float deltaTime, bool isRunning)
             {
@@ -306,16 +309,26 @@ namespace Controller
                 Quaternion targetRotation = Quaternion.LookRotation(targetForward, Vector3.up);
                 float angle = Quaternion.Angle(m_Transform.rotation, targetRotation);
 
-                // Smooth rotate — looks natural
-                float rotationSpeed = isRunning ? 10f : 5f;
+                //m_Transform.rotation = Quaternion.Slerp(m_Transform.rotation, targetRotation, deltaTime * 10f);
 
-                if (angle > 5f)
+                //if (angle > 90f) // Adjust threshold if needed
+                //{
+                //    m_Transform.rotation = targetRotation;
+                //}
+                //else
+                //{
+                //    m_Transform.rotation = Quaternion.Slerp(m_Transform.rotation, targetRotation, deltaTime * 10f);
+                //}
+
+                if (isRunning && angle > 120f)
                 {
                     // Snap instantly — avoids spinning lag
                     m_Transform.rotation = targetRotation;
                 }
                 else
                 {
+                    // Smooth rotate — looks natural
+                    float rotationSpeed = isRunning ? 15f : 10f;
                     m_Transform.rotation = Quaternion.Slerp(m_Transform.rotation, targetRotation, deltaTime * rotationSpeed);
                 }
             }
