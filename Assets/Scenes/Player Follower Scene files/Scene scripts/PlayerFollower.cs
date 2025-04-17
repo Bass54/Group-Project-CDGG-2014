@@ -19,13 +19,14 @@ public class FollowPlayerNavMesh1 : MonoBehaviour
     {
         if (followTarget != null)
         {
+
             agent.SetDestination(followTarget.position);
         }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") && followTarget == null) // Ensures it only triggers once
+        if (other.CompareTag("Player") && followTarget == null)
         {
             if (followers.Count == 0)
             {
@@ -37,8 +38,8 @@ public class FollowPlayerNavMesh1 : MonoBehaviour
             }
 
             followers.Add(transform);
-            count ++;
-            Debug.Log("Follower Count: "+count);
+            count++;
+            Debug.Log("Follower Count: " + count);
         }
     }
 }
