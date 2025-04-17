@@ -4,9 +4,8 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - CinemachineTarget
-  - Enemy
-  - Trap
+  - Ground
+  - Followers
   layers:
   - Default
   - TransparentFX
@@ -14,9 +13,9 @@ TagManager:
   - 
   - Water
   - UI
-  - Enemy
-  - Player
-  - Followers
+  - 
+  - 
+  - 
   - 
   - 
   - 
