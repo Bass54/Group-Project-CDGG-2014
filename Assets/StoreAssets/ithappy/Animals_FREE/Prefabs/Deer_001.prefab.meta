@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d8b100b30dc3e9340addad9ac2bb7e21
+guid: 4ecab060b0afb5d4db61f7f1311b9e24
 PrefabImporter:
   externalObjects: {}
   userData: 
@@ -9,6 +9,6 @@ AssetOrigin:
   serializedVersion: 1
   productId: 260727
   packageName: Animals FREE - Animated Low Poly 3D Models
-  packageVersion: 2.1
-  assetPath: Assets/ithappy/Animals_FREE/Prefabs/Deer_001.prefab
-  uploadId: 724675
+  packageVersion: 2.2
+  assetPath: Assets/StoreAssets/ithappy/Animals_FREE/Prefabs/Deer_001.prefab
+  uploadId: 738856
