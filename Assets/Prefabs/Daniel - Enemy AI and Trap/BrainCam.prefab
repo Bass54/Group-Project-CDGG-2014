@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7335363878889249173}
   - component: {fileID: 5073640057968867048}
   m_Layer: 0
-  m_Name: CinemachineCam
+  m_Name: BrainCam
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
