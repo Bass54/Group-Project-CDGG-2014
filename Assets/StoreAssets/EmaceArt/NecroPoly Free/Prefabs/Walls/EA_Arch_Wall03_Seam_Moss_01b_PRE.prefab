@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 894953846739511530}
   - component: {fileID: 4306664301928130383}
   - component: {fileID: 2026812334921012101}
+  - component: {fileID: 5334035334478976402}
   m_Layer: 0
   m_Name: EA_Arch_Wall03_Seam_Moss_01b_PRE
   m_TagString: Untagged
@@ -87,6 +88,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5334035334478976402
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513502049568518736}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 9.123708, y: 5.243083, z: 1.6287965}
+  m_Center: {x: 0.016578672, y: 2.6215415, z: -0.000002861023}
 --- !u!1001 &2842592792359574174
 PrefabInstance:
   m_ObjectHideFlags: 0
