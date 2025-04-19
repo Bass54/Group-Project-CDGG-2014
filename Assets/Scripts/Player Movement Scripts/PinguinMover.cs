@@ -48,6 +48,10 @@ namespace Controller
         public Vector3 Target => m_Target;
         public bool IsRun => m_IsRun;
 
+        private AudioSource walkingSound;
+        private AudioSource runningSound;
+
+
         private void OnValidate()
         {
             m_WalkSpeed = Mathf.Max(m_WalkSpeed, 0f);
@@ -61,11 +65,26 @@ namespace Controller
             m_Transform = transform;
             m_Controller = GetComponent<CharacterController>();
             m_Animator = GetComponent<Animator>();
+            
+
 
             m_Movement = new MovementHandler(m_Controller, m_Transform, m_WalkSpeed, m_RunSpeed, m_RotateSpeed, m_JumpHeight, m_Space);
             m_Animation = new AnimationHandler(m_Animator, m_VerticalID, m_StateID);
         }
-
+        void playWalkingSound()
+        {
+            if (walkingSound != null)
+            {
+                walkingSound.Play();
+            }
+        }
+        void playRunningSound()
+        {
+            if (runningSound != null)
+            {
+                runningSound.Play();
+            }
+        }
         private void Update()
         {
             // Capture horizontal and vertical input from WASD or Arrow keys
@@ -216,7 +235,7 @@ namespace Controller
                 m_Controller.Move(velocity * deltaTime);
 
                 animAxis = new Vector2(inputDirection.x, inputDirection.z);
-
+               
             }
 
             //private void ConvertMovement(in Vector2 axis, in Vector3 targetForward, out Vector3 movement)
@@ -306,12 +325,12 @@ namespace Controller
                 Quaternion targetRotation = Quaternion.LookRotation(targetForward, Vector3.up);
                 float angle = Quaternion.Angle(m_Transform.rotation, targetRotation);
 
-                // Smooth rotate — looks natural
+                // Smooth rotate ? looks natural
                 float rotationSpeed = isRunning ? 10f : 5f;
 
                 if (angle > 5f)
                 {
-                    // Snap instantly — avoids spinning lag
+                    // Snap instantly ? avoids spinning lag
                     m_Transform.rotation = targetRotation;
                 }
                 else

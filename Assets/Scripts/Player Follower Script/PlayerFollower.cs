@@ -8,11 +8,14 @@ public class PlayerFollower : MonoBehaviour
     private NavMeshAgent agent;
     private Transform followTarget;
     private static List<Transform> followers = new List<Transform>();
-    private static int count = 0;
+    public static int count = 0;
+    private AudioSource encounterSound;
 
     void Start()
     {
+        encounterSound = GetComponent<AudioSource>();
         agent = GetComponent<NavMeshAgent>();
+     
     }
 
     void Update()
@@ -22,6 +25,13 @@ public class PlayerFollower : MonoBehaviour
             agent.SetDestination(followTarget.position);
         }
     }
+    void playSound()
+    {
+        if (encounterSound != null && !encounterSound.isPlaying)
+        {
+            encounterSound.Play();
+        }
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -29,10 +39,12 @@ public class PlayerFollower : MonoBehaviour
         {
             if (followers.Count == 0)
             {
+                playSound();
                 followTarget = other.transform;
             }
             else
             {
+                playSound();
                 followTarget = followers[followers.Count - 1];
             }
 
