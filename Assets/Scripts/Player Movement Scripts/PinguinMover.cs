@@ -31,6 +31,22 @@ namespace Controller
         [SerializeField]
         private LookWeight m_LookWeight = new(1f, 0.3f, 0.7f, 1f);
 
+<<<<<<< Updated upstream
+=======
+        [Header("Audio")]
+        [SerializeField]
+        AudioSource m_AudioSource;
+        [SerializeField]
+        private AudioClip Walking;
+        [SerializeField]
+        private AudioClip Running;
+        [SerializeField]
+        private AudioClip arrowsCollectSound;
+
+        private int arrows = 0;
+        public TextMeshProUGUI arrowsCollected;
+
+>>>>>>> Stashed changes
         private Transform m_Transform;
         private CharacterController m_Controller;
         private Animator m_Animator;
@@ -61,6 +77,11 @@ namespace Controller
             m_Transform = transform;
             m_Controller = GetComponent<CharacterController>();
             m_Animator = GetComponent<Animator>();
+<<<<<<< Updated upstream
+=======
+            m_AudioSource = GetComponent<AudioSource>();
+            
+>>>>>>> Stashed changes
 
             m_Movement = new MovementHandler(m_Controller, m_Transform, m_WalkSpeed, m_RunSpeed, m_RotateSpeed, m_JumpHeight, m_Space);
             m_Animation = new AnimationHandler(m_Animator, m_VerticalID, m_StateID);
@@ -87,10 +108,67 @@ namespace Controller
             SetInput(axis, target, isRun, isJump);  // false means not jumping here
 
 
-            m_Movement.Move(Time.deltaTime, in m_Axis, m_IsRun, m_IsJumping, out var animAxis, out var isAir);
+            m_Movement.Move(Time.deltaTime, in m_Axis, m_IsRun, m_IsJumping, out var animAxis, out bool isAir);
             m_Animation.Animate(in animAxis, m_IsRun ? 1f : 0f, Time.deltaTime);
 
+<<<<<<< Updated upstream
             
+=======
+        private void FixedUpdate()
+        {
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
+
+            m_Target.Set(horizontal, 0f, vertical);
+            m_Target.Normalize();
+
+
+            bool hasHorizaontalINput = !Mathf.Approximately(horizontal, 0f);
+            bool hasVerticalInput = !Mathf.Approximately(vertical, 0f);
+            bool isMoving = hasHorizaontalINput || hasVerticalInput;
+
+            if (m_IsRun || m_IsRun && isMoving)
+            {
+                if (!m_AudioSource.isPlaying)
+                {
+                    m_AudioSource.clip = Running;
+                    m_AudioSource.loop = true;
+                    m_AudioSource.Play();
+                }
+            }
+            else if (isMoving)
+            {
+                if (!m_AudioSource.isPlaying)
+                {
+                    m_AudioSource.clip = Walking;
+                    m_AudioSource.loop = true; 
+                    m_AudioSource.Play();
+                }
+            }
+            else
+            {
+                if (m_AudioSource.isPlaying && m_AudioSource.loop)
+                {
+                    m_AudioSource.Stop();
+                }
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Trap"))
+            {
+                CollectArrow(other);
+            }
+        }
+        
+        void CollectArrow(Collider arrowCollider)
+        {
+            arrows++;
+            arrowsCollected.text = arrows.ToString();
+            Destroy(arrowCollider.gameObject);
+            AudioSource.PlayClipAtPoint(arrowsCollectSound, transform.position);
+>>>>>>> Stashed changes
         }
 
         private void OnAnimatorIK()
@@ -119,6 +197,7 @@ namespace Controller
             m_IsJumping = isJump;
         }
 
+<<<<<<< Updated upstream
         private void OnControllerColliderHit(ControllerColliderHit hit)
         {
             if (hit.normal.y > m_Controller.stepOffset)
@@ -126,6 +205,30 @@ namespace Controller
                 m_Movement.SetSurface(hit.normal);
             }
         }
+=======
+        //private void OnControllerColliderHit(ControllerColliderHit hit)
+        //{
+        //    if (hit.normal.y > m_Controller.stepOffset)
+        //    {
+        //        m_Movement.SetSurface(hit.normal);
+        //    }
+        //    if (hit.gameObject.CompareTag("Exit"))
+        //    {
+        //        gameWon = true;
+        //        Debug.Log("Game won: " + gameWon);
+        //        Destroy(this.gameObject);
+        //        PlayerFollower.DeleteFollowers();
+        //    }
+
+        //    if (hit.gameObject.CompareTag("Enemy"))
+        //    {
+        //        gameLost = true;
+        //        Debug.Log("Game Lost: " + gameLost);
+        //        Destroy(this.gameObject);
+        //        PlayerFollower.DeleteFollowers();
+        //    }
+        //}
+>>>>>>> Stashed changes
 
         [Serializable]
         private struct LookWeight
