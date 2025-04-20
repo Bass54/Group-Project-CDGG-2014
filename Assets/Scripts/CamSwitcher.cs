@@ -12,6 +12,8 @@ public class CamSwitcher : MonoBehaviour
     public float moveDuration = 3f;
 
     private bool cutscenePlayed;
+
+    public GameObject objectiveText;
     
 
     void Start()
@@ -35,11 +37,12 @@ public class CamSwitcher : MonoBehaviour
 
     private IEnumerator SwitchToCutscene()
     {
-      
+        objectiveText.SetActive(false);
         mainCamera.enabled = false;
         cutsceneCamera.enabled = true;
+        
 
-     
+  
         if (objectToMove != null && targetPosition != null)
         {
             StartCoroutine(MoveObjectOverTime(objectToMove.transform, targetPosition.position, moveDuration));
@@ -48,7 +51,7 @@ public class CamSwitcher : MonoBehaviour
     
         yield return new WaitForSeconds(cutsceneDuration);
 
-       
+        objectiveText.SetActive(true);
         cutsceneCamera.enabled = false;
         mainCamera.enabled = true;
     }
