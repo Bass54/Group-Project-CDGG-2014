@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 
+
 public class TextHandler : MonoBehaviour
 {
     public TextMeshProUGUI followerCountText;
@@ -23,6 +24,7 @@ public class TextHandler : MonoBehaviour
         {
             followerCountText.gameObject.SetActive(false);
             objectiveCountText.text = "Escape";
+            
         }
         else
         {

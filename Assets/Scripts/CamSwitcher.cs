@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Controller;
 
 public class CamSwitcher : MonoBehaviour
 {
@@ -29,6 +30,11 @@ public class CamSwitcher : MonoBehaviour
             TriggerCutscene();
             cutscenePlayed = true;
         }
+        if (PinguinMover.gameWon || PinguinMover.gameLost)
+        {
+            objectiveText.SetActive(false);
+        }
+        
     }
     void TriggerCutscene()
     {
