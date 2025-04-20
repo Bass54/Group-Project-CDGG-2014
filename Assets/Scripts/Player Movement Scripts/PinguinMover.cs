@@ -37,6 +37,7 @@ namespace Controller
 
         private MovementHandler m_Movement;
         private AnimationHandler m_Animation;
+        private AudioSource m_AudioSource;
 
         private Vector2 m_Axis;
         private Vector3 m_Target;
@@ -64,6 +65,7 @@ namespace Controller
 
             m_Movement = new MovementHandler(m_Controller, m_Transform, m_WalkSpeed, m_RunSpeed, m_RotateSpeed, m_JumpHeight, m_Space);
             m_Animation = new AnimationHandler(m_Animator, m_VerticalID, m_StateID);
+            m_AudioSource = GetComponent<AudioSource>();
         }
 
         private void Update()
@@ -89,8 +91,58 @@ namespace Controller
 
             m_Movement.Move(Time.deltaTime, in m_Axis, m_IsRun, m_IsJumping, out var animAxis, out var isAir);
             m_Animation.Animate(in animAxis, m_IsRun ? 1f : 0f, Time.deltaTime);
+        }
 
-            
+        private void FixedUpdate()
+        {
+            //float horizontal = Input.GetAxis("Horizontal");
+            //    float vertical = Input.GetAxis("Vertical");
+
+            //    m_Target.Set(horizontal, 0f, vertical);
+            //    m_Target.Normalize();
+
+
+            //    bool hasHorizaontalINput = !Mathf.Approximately(horizontal, 0f);
+            //    bool hasVerticalInput = !Mathf.Approximately(vertical, 0f);
+            //    bool isWalking = hasHorizaontalINput || hasVerticalInput;
+            //    m_Animator.SetBool("IsWalking", isWalking);
+            //    m_Animator.SetBool("IsRunning", m_IsRun);
+            //    m_Animator.SetBool("IsJumping", m_IsJump);
+
+            //    if (isWalking)
+            //    {
+            //        if (!m_AudioSource.isPlaying)
+            //        {
+            //            m_AudioSource.Play();
+            //        }
+            //    }
+            //    else if (m_IsRun)
+            //    {
+            //        if (!m_AudioSource.isPlaying)
+            //        {
+            //            m_AudioSource.Play();
+            //        }
+            //    }
+            //    else if(m_IsJump)
+            //    {
+            //        if (!m_AudioSource.isPlaying)
+            //        {
+            //            m_AudioSource.Play();
+            //        }
+            //    }
+            //    else
+            //    {
+            //        m_AudioSource.Stop();
+            //    }
+
+            //    if (m_IsJump)
+            //    {
+            //        m_Animator.SetTrigger("Jump");
+            //    }
+            //    if (m_IsRun)
+            //    {
+            //        m_Animator.SetTrigger("Run");
+            //    }
         }
 
         private void OnAnimatorIK()
