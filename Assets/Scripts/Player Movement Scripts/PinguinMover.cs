@@ -62,6 +62,9 @@ namespace Controller
         public Vector3 Target => m_Target;
         public bool IsRun => m_IsRun;
 
+        public static bool gameWon = false;
+        public static bool gameLost = false;
+
 
         private void OnValidate()
         {
@@ -82,6 +85,8 @@ namespace Controller
 
             m_Movement = new MovementHandler(m_Controller, m_Transform, m_WalkSpeed, m_RunSpeed, m_RotateSpeed, m_JumpHeight, m_Space);
             m_Animation = new AnimationHandler(m_Animator, m_VerticalID, m_StateID);
+
+           
         }
 
         private void Update()
@@ -158,7 +163,7 @@ namespace Controller
                 CollectArrow(other);
             }
         }
-
+        
         void CollectArrow(Collider arrowCollider)
         {
             arrows++;
@@ -198,6 +203,21 @@ namespace Controller
             if (hit.normal.y > m_Controller.stepOffset)
             {
                 m_Movement.SetSurface(hit.normal);
+            }
+            if (hit.gameObject.CompareTag("Exit"))
+            {
+                gameWon = true;
+                Debug.Log("Game won: " + gameWon);
+                Destroy(this.gameObject);
+                PlayerFollower.DeleteFollowers();
+            }
+
+            if (hit.gameObject.CompareTag("Enemy"))
+            {
+                gameLost = true;
+                Debug.Log("Game Lost: " + gameLost);
+                Destroy(this.gameObject);
+                PlayerFollower.DeleteFollowers();
             }
         }
 

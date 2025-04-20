@@ -53,5 +53,18 @@ public class PlayerFollower : MonoBehaviour
             Debug.Log("Follower Count: " + count);
         }
     }
+    public static void DeleteFollowers()
+    {
+        foreach (Transform follower in followers)
+        {
+            if (follower != null)
+            {
+                Destroy(follower.gameObject);
+            }
+        }
+
+        followers.Clear();
+        count = 0;
+    }
 }
 
