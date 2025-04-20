@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ namespace Controller
 {
     [RequireComponent(typeof(CharacterController))]
     [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(AudioSource))]
     [DisallowMultipleComponent]
     public class PinguinMover : MonoBehaviour
     {
@@ -31,6 +33,18 @@ namespace Controller
         [SerializeField]
         private LookWeight m_LookWeight = new(1f, 0.3f, 0.7f, 1f);
 
+        [Header("Audio")]
+        AudioSource m_AudioSource;
+        [SerializeField]
+        private AudioClip Walking;
+        [SerializeField]
+        private AudioClip Running;
+        [SerializeField]
+        private AudioClip arrowsCollectSound;
+
+        private int arrows = 0;
+        public TextMeshProUGUI arrowsCollected;
+
         private Transform m_Transform;
         private CharacterController m_Controller;
         private Animator m_Animator;
@@ -48,9 +62,6 @@ namespace Controller
         public Vector3 Target => m_Target;
         public bool IsRun => m_IsRun;
 
-        private AudioSource walkingSound;
-        private AudioSource runningSound;
-
 
         private void OnValidate()
         {
@@ -65,26 +76,14 @@ namespace Controller
             m_Transform = transform;
             m_Controller = GetComponent<CharacterController>();
             m_Animator = GetComponent<Animator>();
+            m_AudioSource = GetComponent<AudioSource>();
+            m_AudioSource.loop = false;
             
-
 
             m_Movement = new MovementHandler(m_Controller, m_Transform, m_WalkSpeed, m_RunSpeed, m_RotateSpeed, m_JumpHeight, m_Space);
             m_Animation = new AnimationHandler(m_Animator, m_VerticalID, m_StateID);
         }
-        void playWalkingSound()
-        {
-            if (walkingSound != null)
-            {
-                walkingSound.Play();
-            }
-        }
-        void playRunningSound()
-        {
-            if (runningSound != null)
-            {
-                runningSound.Play();
-            }
-        }
+
         private void Update()
         {
             // Capture horizontal and vertical input from WASD or Arrow keys
@@ -108,8 +107,64 @@ namespace Controller
 
             m_Movement.Move(Time.deltaTime, in m_Axis, m_IsRun, m_IsJumping, out var animAxis, out var isAir);
             m_Animation.Animate(in animAxis, m_IsRun ? 1f : 0f, Time.deltaTime);
+        }
 
-            
+        private void FixedUpdate()
+        {
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
+
+            m_Target.Set(horizontal, 0f, vertical);
+            m_Target.Normalize();
+
+
+            bool hasHorizaontalINput = !Mathf.Approximately(horizontal, 0f);
+            bool hasVerticalInput = !Mathf.Approximately(vertical, 0f);
+            bool isWalking = hasHorizaontalINput || hasVerticalInput;
+            m_Animator.SetBool("IsWalking", isWalking && !m_IsRun);
+            m_Animator.SetBool("IsRunning", m_IsRun);
+
+            if (isWalking && m_IsRun)
+            {
+                if (!m_AudioSource.isPlaying)
+                {
+                    m_AudioSource.clip = Running;
+                    m_AudioSource.loop = true;
+                    m_AudioSource.Play();
+                }
+            }
+            else if (isWalking)
+            {
+                if (!m_AudioSource.isPlaying)
+                {
+                    m_AudioSource.clip = Walking;
+                    m_AudioSource.loop = true;
+                    m_AudioSource.Play();
+                }
+            }
+            else
+            {
+                if (m_AudioSource.isPlaying && m_AudioSource.loop)
+                {
+                    m_AudioSource.Stop();
+                }
+            }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Trap"))
+            {
+                CollectArrow(other);
+            }
+        }
+
+        void CollectArrow(Collider arrowCollider)
+        {
+            arrows++;
+            arrowsCollected.text = arrows.ToString();
+            Destroy(arrowCollider.gameObject);
+            AudioSource.PlayClipAtPoint(arrowsCollectSound, transform.position);
         }
 
         private void OnAnimatorIK()
@@ -175,17 +230,17 @@ namespace Controller
 
             private Space m_Space;
 
-            private readonly float m_Luft = 75f;
+            //private readonly float m_Luft = 75f;
 
-            private float m_TargetAngle;
-            private bool m_IsRotating = false;
+            //private float m_TargetAngle;
+            //private bool m_IsRotating = false;
 
             private Vector3 m_Normal;
             private Vector3 m_GravityAcelleration = Physics.gravity;
             private float m_JumpHeight = 5f;
 
             private float m_jumpTimer;
-            private Vector3 m_LastForward;
+            //private Vector3 m_LastForward;
 
             public MovementHandler(CharacterController controller, Transform transform, float walkSpeed, float runSpeed, float rotateSpeed, float jumpHeight, Space space)
             {
