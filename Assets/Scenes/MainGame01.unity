@@ -6918,7 +6918,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1206035956}
   - component: {fileID: 1206035955}
-  - component: {fileID: 1206035954}
   - component: {fileID: 1206035957}
   - component: {fileID: 1206035958}
   - component: {fileID: 1206035959}
@@ -6929,14 +6928,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1206035954
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1206035953}
-  m_Enabled: 1
 --- !u!20 &1206035955
 Camera:
   m_ObjectHideFlags: 0
@@ -6997,7 +6988,7 @@ Transform:
   m_GameObject: {fileID: 1206035953}
   serializedVersion: 2
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 1.2747129, y: 10.780314, z: -34.873394}
+  m_LocalPosition: {x: 1.3920872, y: 10.780314, z: -34.873394}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8303,6 +8294,10 @@ MonoBehaviour:
     body: 0.3
     head: 0.7
     eyes: 1
+  Walking: {fileID: 0}
+  Running: {fileID: 0}
+  arrowsCollectSound: {fileID: 0}
+  arrowsCollected: {fileID: 0}
 --- !u!95 &1401112935
 Animator:
   serializedVersion: 7
@@ -14879,6 +14874,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1391722388916335052, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1825357380100152881, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -15540,7 +15539,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1958424045476813827, guid: 4c5b88fe27523bc4ca33a4dd63e3f122, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.2747129
+      value: 1.3920872
       objectReference: {fileID: 0}
     - target: {fileID: 1958424045476813827, guid: 4c5b88fe27523bc4ca33a4dd63e3f122, type: 3}
       propertyPath: m_LocalPosition.y
