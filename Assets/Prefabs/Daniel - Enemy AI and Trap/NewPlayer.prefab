@@ -358,8 +358,6 @@ MonoBehaviour:
     eyes: 1
   Walking: {fileID: 8300000, guid: 5b5e0fa259804477ea33fa1d16b56972, type: 3}
   Running: {fileID: 8300000, guid: 777ef9c15558d4b6a8e3fed686eb337c, type: 3}
-  arrowsCollectSound: {fileID: 8300000, guid: 72bfd9125a7a0490a9183c41908204b2, type: 3}
-  arrowsCollected: {fileID: 0}
 --- !u!114 &4593800820775944595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1086,8 +1084,6 @@ MonoBehaviour:
     eyes: 1
   Walking: {fileID: 0}
   Running: {fileID: 0}
-  arrowsCollectSound: {fileID: 0}
-  arrowsCollected: {fileID: 0}
 --- !u!114 &4728268749179887769
 MonoBehaviour:
   m_ObjectHideFlags: 0

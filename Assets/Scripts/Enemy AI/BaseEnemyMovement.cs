@@ -102,7 +102,8 @@ public class BaseEnemyMovement : MonoBehaviour
             }
         }
 
-        if (other.gameObject.CompareTag("Trap")) {
+        if (other.gameObject.CompareTag("Trap"))
+        {
             TrapTimer = TrapTimerMax;
         }
     }

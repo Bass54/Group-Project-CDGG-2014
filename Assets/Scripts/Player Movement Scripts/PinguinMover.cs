@@ -39,11 +39,6 @@ namespace Controller
         private AudioClip Walking;
         [SerializeField]
         private AudioClip Running;
-        [SerializeField]
-        private AudioClip arrowsCollectSound;
-
-        private int arrows = 0;
-        public TextMeshProUGUI arrowsCollected;
 
         private Transform m_Transform;
         private CharacterController m_Controller;
@@ -80,7 +75,7 @@ namespace Controller
             m_Controller = GetComponent<CharacterController>();
             m_Animator = GetComponent<Animator>();
             m_AudioSource = GetComponent<AudioSource>();
-            m_AudioSource.loop = false;
+            m_AudioSource.loop = true;
             
 
             m_Movement = new MovementHandler(m_Controller, m_Transform, m_WalkSpeed, m_RunSpeed, m_RotateSpeed, m_JumpHeight, m_Space);
@@ -126,51 +121,42 @@ namespace Controller
             bool hasHorizaontalINput = !Mathf.Approximately(horizontal, 0f);
             bool hasVerticalInput = !Mathf.Approximately(vertical, 0f);
             bool isWalking = hasHorizaontalINput || hasVerticalInput;
-            m_Animator.SetBool("IsWalking", isWalking && !m_IsRun);
-            m_Animator.SetBool("IsRunning", m_IsRun);
+            m_IsRun = Input.GetKey(KeyCode.LeftShift);
 
-            if (isWalking && m_IsRun)
+            if (isWalking)
             {
-                if (!m_AudioSource.isPlaying)
+                AudioClip desired = m_IsRun ? Running : Walking;
+
+                if (m_AudioSource.isPlaying != desired || !m_AudioSource.isPlaying)
                 {
-                    m_AudioSource.clip = Running;
-                    m_AudioSource.loop = true;
-                    m_AudioSource.Play();
-                }
-            }
-            else if (isWalking)
-            {
-                if (!m_AudioSource.isPlaying)
-                {
-                    m_AudioSource.clip = Walking;
-                    m_AudioSource.loop = true;
+                    m_AudioSource.clip = desired;
                     m_AudioSource.Play();
                 }
             }
             else
             {
-                if (m_AudioSource.isPlaying && m_AudioSource.loop)
+                if (m_AudioSource.isPlaying)
                 {
                     m_AudioSource.Stop();
                 }
             }
         }
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag("Trap"))
-            {
-                CollectArrow(other);
-            }
-        }
+        //private void OnTriggerEnter(Collider other)
+        //{
+        //    if (other.CompareTag("Trap"))
+        //    {
+        //        CollectArrow(other);
+        //    }
+        //}
         
-        void CollectArrow(Collider arrowCollider)
-        {
-            arrows++;
-            arrowsCollected.text = arrows.ToString();
-            Destroy(arrowCollider.gameObject);
-            AudioSource.PlayClipAtPoint(arrowsCollectSound, transform.position);
-        }
+        //void CollectArrow(Collider arrowCollider)
+        //{
+        //    arrows++;
+        //    arrowsCollected.text = arrows.ToString();
+        //    Destroy(arrowCollider.gameObject);
+        //    AudioSource.PlayClipAtPoint(arrowsCollectSound, transform.position);
+        //}
 
         private void OnAnimatorIK()
         {
