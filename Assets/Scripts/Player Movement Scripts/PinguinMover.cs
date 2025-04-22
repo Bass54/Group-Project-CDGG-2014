@@ -60,6 +60,13 @@ namespace Controller
         public static bool gameWon = false;
         public static bool gameLost = false;
 
+        [SerializeField] private GameObject EndHandlingObject;
+        private EndHandling endHandling;
+
+        private void Start() {
+            EndHandling endHandling = EndHandlingObject.GetComponent<EndHandling>(); 
+        }
+
 
         private void OnValidate()
         {
@@ -204,6 +211,10 @@ namespace Controller
                 Debug.Log("Game Lost: " + gameLost);
                 Destroy(this.gameObject);
                 PlayerFollower.DeleteFollowers();
+                
+                if (endHandling != null) {
+                    endHandling.DeathEnd();
+                }
             }
         }
 
