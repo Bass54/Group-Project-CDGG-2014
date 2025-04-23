@@ -191,32 +191,32 @@ namespace Controller
             m_IsJumping = isJump;
         }
 
-        private void OnControllerColliderHit(ControllerColliderHit hit)
-        {
-            if (hit.normal.y > m_Controller.stepOffset)
-            {
-                m_Movement.SetSurface(hit.normal);
-            }
-            if (hit.gameObject.CompareTag("Exit"))
-            {
-                gameWon = true;
-                Debug.Log("Game won: " + gameWon);
-                Destroy(this.gameObject);
-                PlayerFollower.DeleteFollowers();
-            }
+        //private void OnControllerColliderHit(ControllerColliderHit hit)
+        //{
+            //if (hit.normal.y > m_Controller.stepOffset)
+            //{
+                //m_Movement.SetSurface(hit.normal);
+            //}
+            //if (hit.gameObject.CompareTag("Exit"))
+            //{
+                //gameWon = true;
+                //Debug.Log("Game won: " + gameWon);
+                //Destroy(this.gameObject);
+                //PlayerFollower.DeleteFollowers();
+            //}
 
-            if (hit.gameObject.CompareTag("Enemy"))
-            {
-                gameLost = true;
-                Debug.Log("Game Lost: " + gameLost);
-                Destroy(this.gameObject);
-                PlayerFollower.DeleteFollowers();
+            //if (hit.gameObject.CompareTag("Enemy"))
+            //{
+                //gameLost = true;
+                //Debug.Log("Game Lost: " + gameLost);
+                //Destroy(this.gameObject);
+                //PlayerFollower.DeleteFollowers();
                 
-                if (endHandling != null) {
-                    endHandling.DeathEnd();
-                }
-            }
-        }
+                //if (endHandling != null) {
+                    //endHandling.DeathEnd();
+                //}
+            //}
+        //}
 
         [Serializable]
         private struct LookWeight

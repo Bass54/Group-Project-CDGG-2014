@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class EndHandling : MonoBehaviour
 {
@@ -36,13 +37,18 @@ public class EndHandling : MonoBehaviour
             }
         }
 
-        //Check Distances
+        CheckDistance();
+
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            SceneManager.LoadScene(0);
+        }
     }
 
     void OnTriggerEnter(Collider other) {
         if (other.gameObject == Player) {
             Win = true;
             EndScaling = true;
+            Debug.Log("Collision");
         }
     }
 
@@ -69,5 +75,14 @@ public class EndHandling : MonoBehaviour
         Color colorBack = WinEndOpBack.color;
         colorBack.a = Mathf.Clamp01(alpha);
         WinEndOpBack.color = colorBack;
+    }
+
+    void CheckDistance() {
+        foreach (Transform obj in Enemies) {
+            float distance = Vector3.Distance(obj.position, PlayerTransform.position);
+            if (distance <= ClosingDistance) {
+                DeathEnd();
+            }
+        }
     }
 }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8673088601525188129}
   - component: {fileID: 282892498333291214}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Snow Man_01
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 6989505907311641052}
   - component: {fileID: 7522383621307462970}
   - component: {fileID: 4713363510990541364}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Hat
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 8190418273562622093}
   - component: {fileID: 4926300056139825959}
   - component: {fileID: 5154796116159155885}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Body
   m_TagString: Enemy
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 1558372125358992438}
   - component: {fileID: 5356099761674757859}
   - component: {fileID: 7674823870466877407}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: L_Hand
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -398,7 +398,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2459114017864024215}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: SnowmanEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -432,7 +432,7 @@ GameObject:
   - component: {fileID: 7621071069351425148}
   - component: {fileID: 8779090420399822493}
   - component: {fileID: 3789824075299580753}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Head
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -518,7 +518,7 @@ GameObject:
   - component: {fileID: 5736575897266039366}
   - component: {fileID: 5654581384575618510}
   - component: {fileID: 8201380858313699862}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Body_Stomach
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -604,7 +604,7 @@ GameObject:
   - component: {fileID: 4001929221104815965}
   - component: {fileID: 1554777691466436975}
   - component: {fileID: 6834197346790277479}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: R_Hand
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -690,7 +690,7 @@ GameObject:
   - component: {fileID: 2571637633195392343}
   - component: {fileID: 5861158307869763280}
   - component: {fileID: 4733263566300134085}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Body_Lower
   m_TagString: Enemy
   m_Icon: {fileID: 0}
