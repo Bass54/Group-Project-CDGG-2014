@@ -240,6 +240,7 @@ GameObject:
   - component: {fileID: 852145873825057087}
   - component: {fileID: 4593800820775944595}
   - component: {fileID: 1391722388916335052}
+  - component: {fileID: 1349995595537155929}
   - component: {fileID: 7571898380577851614}
   - component: {fileID: 3801507692374366883}
   - component: {fileID: 434267357031599194}
@@ -382,7 +383,7 @@ MonoBehaviour:
   m_RunSpeed: 4
   m_RotateSpeed: 90
   m_Space: 1
-  m_JumpHeight: 5
+  m_JumpHeight: 0
   m_IsJumping: 0
   m_VerticalID: Vert
   m_StateID: State
@@ -391,8 +392,6 @@ MonoBehaviour:
     body: 0.3
     head: 0.7
     eyes: 1
-  Walking: {fileID: 8300000, guid: 5b5e0fa259804477ea33fa1d16b56972, type: 3}
-  Running: {fileID: 8300000, guid: 777ef9c15558d4b6a8e3fed686eb337c, type: 3}
   EndHandlingObject: {fileID: 0}
 --- !u!114 &4593800820775944595
 MonoBehaviour:
@@ -414,6 +413,8 @@ MonoBehaviour:
   m_MouseX: Mouse X
   m_MouseY: Mouse Y
   m_MouseScroll: Mouse ScrollWheel
+  Walk: {fileID: 1391722388916335052}
+  Run: {fileID: 1349995595537155929}
 --- !u!82 &1391722388916335052
 AudioSource:
   m_ObjectHideFlags: 0
@@ -424,12 +425,109 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: dc80b0da8c2aa425d9a71ced3eaa3a53, type: 3}
-  m_Resource: {fileID: 8300000, guid: dc80b0da8c2aa425d9a71ced3eaa3a53, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 5b5e0fa259804477ea33fa1d16b56972, type: 3}
+  m_Resource: {fileID: 8300000, guid: 5b5e0fa259804477ea33fa1d16b56972, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &1349995595537155929
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2571598129965511113}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 777ef9c15558d4b6a8e3fed686eb337c, type: 3}
+  m_Resource: {fileID: 8300000, guid: 777ef9c15558d4b6a8e3fed686eb337c, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1214,8 +1312,6 @@ MonoBehaviour:
     body: 0.3
     head: 0.7
     eyes: 1
-  Walking: {fileID: 0}
-  Running: {fileID: 0}
   EndHandlingObject: {fileID: 0}
 --- !u!114 &4728268749179887769
 MonoBehaviour:
@@ -1237,6 +1333,8 @@ MonoBehaviour:
   m_MouseX: Mouse X
   m_MouseY: Mouse Y
   m_MouseScroll: Mouse ScrollWheel
+  Walk: {fileID: 0}
+  Run: {fileID: 0}
 --- !u!82 &6291233589033677558
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1249,7 +1347,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

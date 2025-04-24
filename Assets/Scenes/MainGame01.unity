@@ -7067,7 +7067,6 @@ GameObject:
   m_Component:
   - component: {fileID: 884055480}
   - component: {fileID: 884055479}
-  - component: {fileID: 884055478}
   - component: {fileID: 884055477}
   m_Layer: 0
   m_Name: GateCamera
@@ -7120,14 +7119,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!81 &884055478
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 884055476}
-  m_Enabled: 1
 --- !u!20 &884055479
 Camera:
   m_ObjectHideFlags: 0
@@ -8935,7 +8926,7 @@ Transform:
   m_GameObject: {fileID: 1206035953}
   serializedVersion: 2
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 2.1247776, y: 10.780314, z: -37.833393}
+  m_LocalPosition: {x: 2.2475023, y: 10.780314, z: -37.833393}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10212,26 +10203,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8866761874866491165, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
   m_PrefabInstance: {fileID: 1758622348}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1401112933
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401112931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e95e2f5ca28df2b49a3586e87f3e041f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_JumpButton: Jump
-  m_RunKey: 304
-  m_Camera: {fileID: 0}
-  m_MouseX: Mouse X
-  m_MouseY: Mouse Y
-  m_MouseScroll: Mouse ScrollWheel
 --- !u!114 &1401112934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10257,8 +10228,6 @@ MonoBehaviour:
     body: 0.3
     head: 0.7
     eyes: 1
-  Walking: {fileID: 0}
-  Running: {fileID: 0}
   EndHandlingObject: {fileID: 0}
 --- !u!95 &1401112935
 Animator:
@@ -10270,7 +10239,7 @@ Animator:
   m_GameObject: {fileID: 1401112931}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: be5a7892afce29a438c8214b00153288, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -17057,10 +17026,6 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 434267357031599194, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
-      propertyPath: Arrows
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 434267357031599194, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
       propertyPath: ArrowText
       value: 
       objectReference: {fileID: 262279397}
@@ -17072,8 +17037,12 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1349995595537155929, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1391722388916335052, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
-      propertyPath: m_Enabled
+      propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1825357380100152881, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
@@ -17213,9 +17182,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8866761874866491165, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1401112934}
-    - targetCorrespondingSourceObject: {fileID: 8866761874866491165, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1401112933}
   m_SourcePrefab: {fileID: 100100000, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
 --- !u!4 &1764539805 stripped
 Transform:
@@ -17878,7 +17844,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1958424045476813827, guid: 4c5b88fe27523bc4ca33a4dd63e3f122, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.1247776
+      value: 2.2475023
       objectReference: {fileID: 0}
     - target: {fileID: 1958424045476813827, guid: 4c5b88fe27523bc4ca33a4dd63e3f122, type: 3}
       propertyPath: m_LocalPosition.y

@@ -999,6 +999,7 @@ MonoBehaviour:
     body: 0.3
     head: 0.7
     eyes: 1
+  EndHandlingObject: {fileID: 0}
 --- !u!114 &6127726515094879609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1019,6 +1020,9 @@ MonoBehaviour:
   m_MouseX: Mouse X
   m_MouseY: Mouse Y
   m_MouseScroll: Mouse ScrollWheel
+  m_AudioSource: {fileID: 0}
+  Walking: {fileID: 0}
+  Running: {fileID: 0}
 --- !u!195 &2371120882819901656
 NavMeshAgent:
   m_ObjectHideFlags: 0

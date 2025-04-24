@@ -17,7 +17,7 @@ namespace Controller
         [SerializeField]
         private float m_RunSpeed = 4f;
         [SerializeField, Range(0f, 360f)]
-        private float m_RotateSpeed = 110f;
+        private float m_RotateSpeed = 90f;
         [SerializeField]
         private Space m_Space = Space.Self;
         [SerializeField]
@@ -32,13 +32,6 @@ namespace Controller
         private string m_StateID = "State";
         [SerializeField]
         private LookWeight m_LookWeight = new(1f, 0.3f, 0.7f, 1f);
-
-        [Header("Audio")]
-        AudioSource m_AudioSource;
-        [SerializeField]
-        private AudioClip Walking;
-        [SerializeField]
-        private AudioClip Running;
 
         private Transform m_Transform;
         private CharacterController m_Controller;
@@ -64,7 +57,7 @@ namespace Controller
         private EndHandling endHandling;
 
         private void Start() {
-            EndHandling endHandling = EndHandlingObject.GetComponent<EndHandling>(); 
+            //EndHandling endHandling = EndHandlingObject.GetComponent<EndHandling>(); 
         }
 
 
@@ -81,8 +74,6 @@ namespace Controller
             m_Transform = transform;
             m_Controller = GetComponent<CharacterController>();
             m_Animator = GetComponent<Animator>();
-            m_AudioSource = GetComponent<AudioSource>();
-            m_AudioSource.loop = true;
             
 
             m_Movement = new MovementHandler(m_Controller, m_Transform, m_WalkSpeed, m_RunSpeed, m_RotateSpeed, m_JumpHeight, m_Space);
@@ -106,7 +97,7 @@ namespace Controller
             // Set whether the player is running (e.g., holding down Shift key)
             bool isRun = Input.GetKey(KeyCode.LeftShift);  // Run with Left Shift key
 
-            bool isJump = Input.GetKeyDown(KeyCode.Space);  // Jump with Space key
+            bool isJump = Input.GetKeyDown(KeyCode.J);  // Jump with Space key
 
             // Pass the input to the CreatureMover component (this will handle movement)
             SetInput(axis, target, isRun, isJump);  // false means not jumping here
@@ -116,54 +107,6 @@ namespace Controller
             m_Animation.Animate(in animAxis, m_IsRun ? 1f : 0f, Time.deltaTime);
         }
 
-        private void FixedUpdate()
-        {
-            float horizontal = Input.GetAxis("Horizontal");
-            float vertical = Input.GetAxis("Vertical");
-
-            m_Target.Set(horizontal, 0f, vertical);
-            m_Target.Normalize();
-
-
-            bool hasHorizaontalINput = !Mathf.Approximately(horizontal, 0f);
-            bool hasVerticalInput = !Mathf.Approximately(vertical, 0f);
-            bool isWalking = hasHorizaontalINput || hasVerticalInput;
-            m_IsRun = Input.GetKey(KeyCode.LeftShift);
-
-            if (isWalking)
-            {
-                AudioClip desired = m_IsRun ? Running : Walking;
-
-                if (m_AudioSource.isPlaying != desired || !m_AudioSource.isPlaying)
-                {
-                    m_AudioSource.clip = desired;
-                    m_AudioSource.Play();
-                }
-            }
-            else
-            {
-                if (m_AudioSource.isPlaying)
-                {
-                    m_AudioSource.Stop();
-                }
-            }
-        }
-
-        //private void OnTriggerEnter(Collider other)
-        //{
-        //    if (other.CompareTag("Trap"))
-        //    {
-        //        CollectArrow(other);
-        //    }
-        //}
-        
-        //void CollectArrow(Collider arrowCollider)
-        //{
-        //    arrows++;
-        //    arrowsCollected.text = arrows.ToString();
-        //    Destroy(arrowCollider.gameObject);
-        //    AudioSource.PlayClipAtPoint(arrowsCollectSound, transform.position);
-        //}
 
         private void OnAnimatorIK()
         {
