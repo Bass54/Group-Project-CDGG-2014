@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 5756969255532523285}
   - component: {fileID: 8631774164844007092}
   - component: {fileID: 8549808458128780235}
+  - component: {fileID: 4333929998063246017}
   m_Layer: 0
   m_Name: Arrow
-  m_TagString: Trap
+  m_TagString: ArrowTrap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49,7 +50,7 @@ CapsuleCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 375
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -78,7 +79,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 375
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
@@ -98,10 +99,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3d473dd6af134849b177c3e8caf8dec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 30
   TrapTime: 6
   TagDelay: 0
   DestroyDefaultDelay: 30
+--- !u!65 &4333929998063246017
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1536064024927109410}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.08, y: 0.08, z: 1.6}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2914756030199219502
 GameObject:
   m_ObjectHideFlags: 0

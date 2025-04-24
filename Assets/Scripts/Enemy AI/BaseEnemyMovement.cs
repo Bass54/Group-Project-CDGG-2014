@@ -102,8 +102,7 @@ public class BaseEnemyMovement : MonoBehaviour
             }
         }
 
-        if (other.gameObject.CompareTag("Trap"))
-        {
+        if (other.gameObject.CompareTag("BlockTrap")) {
             TrapTimer = TrapTimerMax;
         }
     }
@@ -173,6 +172,13 @@ public class BaseEnemyMovement : MonoBehaviour
         }
         else if (DetectPlayer) {
             agent.SetDestination(Player.transform.position);
+        }
+    }
+
+    void OnCollisionEnter(Collision other) {
+
+        if (other.gameObject.CompareTag("ArrowTrap")) {
+            TrapTimer = TrapTimerMax;
         }
     }
 }

@@ -7,13 +7,21 @@ public class ArrowScript : MonoBehaviour
     [SerializeField] private float TagDelay;
     [SerializeField] private float DestroyDefaultDelay;
 
+    private Rigidbody rb;
+    private bool HasHit = false;
+
     private void Start() {
         GetComponent<Rigidbody>().linearVelocity = transform.forward * speed;
+        rb = GetComponent<Rigidbody>();
         Invoke("DestroyObject", DestroyDefaultDelay);
     }
+
     private void OnTriggerEnter(Collider collision) {
+        if (collision.isTrigger) return;
         if (collision.gameObject.CompareTag("Enemy"))
         {
+            HasHit = true;
+            Debug.Log("Arrow Collided");
             Invoke("DestroyObject", TrapTime);
             Invoke("RemoveTag", TagDelay);
             transform.SetParent(collision.transform);
@@ -38,5 +46,11 @@ public class ArrowScript : MonoBehaviour
 
     private void RemoveTag() {
         gameObject.tag = "Untagged";
+    }
+
+    void Update() {
+        if (!HasHit) {
+            GetComponent<Rigidbody>().linearVelocity = transform.forward * speed;
+        }
     }
 }

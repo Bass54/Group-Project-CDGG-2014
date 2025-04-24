@@ -7,8 +7,10 @@ TagManager:
   - Ground
   - Followers
   - Enemy
-  - Trap
   - Exit
+  - Arrows
+  - BlockTrap
+  - ArrowTrap
   layers:
   - Default
   - TransparentFX
