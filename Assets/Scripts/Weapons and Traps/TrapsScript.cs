@@ -13,7 +13,7 @@ public class TrapsScript : MonoBehaviour
     }
 
     void Update() {
-        if (Input.GetButtonDown("PlaceTrap")) {
+        if (Input.GetKey(KeyCode.Q)) {
             if (Traps > 0) {
                 Instantiate(TrapPrefab, SpawnPoint.position, SpawnPoint.rotation);;
                 Traps--;

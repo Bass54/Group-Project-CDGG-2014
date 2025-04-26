@@ -13,7 +13,7 @@ public class BowAndArrowScript : MonoBehaviour
     }
 
     void Update() {
-        if (Input.GetButtonDown("FireBow")) {
+        if (Input.GetKey(KeyCode.E)) {
             if (Arrows > 0) {
                 Instantiate(ArrowPrefab, SpawnPoint.position, SpawnPoint.rotation);;
                 Arrows--;

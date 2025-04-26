@@ -1,5 +1,7 @@
 using Mono.Cecil;
+using Unity.VisualScripting;
 using UnityEngine;
+//using static Unity.VisualScripting.Round<TInput, TOutput>;
 using static UnityEngine.SpriteMask;
 
 namespace Controller
@@ -28,8 +30,9 @@ namespace Controller
         private string m_MouseScroll = "Mouse ScrollWheel";
 
         [Header("Audio")]
-        [SerializeField] private AudioSource Walk;
-        [SerializeField] private AudioSource Run;
+        [SerializeField] private AudioSource footstepSource;
+        [SerializeField] private AudioClip Walk;
+        [SerializeField] private AudioClip Run;
 
         private PinguinMover m_Mover;
         Animator m_Animator;
@@ -45,12 +48,24 @@ namespace Controller
         private void Awake()
         {
             m_Mover = GetComponent<PinguinMover>();
-            m_Animator = GetComponent<Animator>();
-            Walk = GetComponent<AudioSource>();
-            Run = GetComponent<AudioSource>();
-            Walk.loop = true;
-            Run.loop = true;
 
+            if (footstepSource == null)
+            {
+                footstepSource = gameObject.AddComponent<AudioSource>();
+                footstepSource.loop = true;
+            }
+            if (Walk == null)
+            {
+                Walk = Resources.Load<AudioClip>("Audio/Footsteps/Walking");
+            }
+            if (Run == null)
+            {
+                Run = Resources.Load<AudioClip>("Audio/Footsteps/Running");
+            }
+            if (m_Animator == null)
+            {
+                m_Animator = GetComponent<Animator>();
+            }
         }
 
         private void Update()
@@ -58,39 +73,32 @@ namespace Controller
             GatherInput();
             SetInput();
 
-            float horizontal = Input.GetAxisRaw("Horizontal");
-            float vertical = Input.GetAxisRaw("Vertical");
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
 
-            m_Target.Set(horizontal, 0f, vertical);
-            m_Target.Normalize();
-
-
-            bool hasHorizaontalINput = !Mathf.Approximately(horizontal, 0f);
-            bool hasVerticalInput = !Mathf.Approximately(vertical, 0f);
-            bool isMoving = hasHorizaontalINput || hasVerticalInput;
+            bool isMoving = (horizontal != 0f) || (vertical != 0f);
             m_IsRun = Input.GetKey(KeyCode.LeftShift);
 
             float speed = new Vector3(horizontal, 0f, vertical).magnitude;
             m_Animator.SetFloat("Vert", speed);
             m_Animator.SetFloat("State", m_IsRun ? 1f : 0f);
 
-            if (isMoving)
+            AudioClip desired = null;
+            if (isMoving) desired = m_IsRun ? Run : Walk;
+
+            if (desired != null)
             {
-                if (m_IsRun)
+                if (footstepSource.clip != desired || !footstepSource.isPlaying)
                 {
-                    if (!Run.isPlaying) Run.Play();
-                    if (Walk.isPlaying) Walk.Stop();
-                }
-                else
-                {
-                    if (!Walk.isPlaying) Walk.Play();
-                    if (Run.isPlaying) Run.Stop();
+                    footstepSource.clip = desired;
+                    footstepSource.loop = true;
+                    footstepSource.Play();
                 }
             }
             else
             {
-                if (Walk.isPlaying) Walk.Stop();
-                if (Run.isPlaying) Run.Stop();
+                if (footstepSource.isPlaying)
+                    footstepSource.Stop();
             }
         }
 

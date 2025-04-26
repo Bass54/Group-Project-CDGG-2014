@@ -779,8 +779,7 @@ MonoBehaviour:
     body: 0.3
     head: 0.7
     eyes: 1
-  Walking: {fileID: 8300000, guid: 5b5e0fa259804477ea33fa1d16b56972, type: 3}
-  Running: {fileID: 8300000, guid: 777ef9c15558d4b6a8e3fed686eb337c, type: 3}
+  EndHandlingObject: {fileID: 0}
 --- !u!114 &6952916337578654946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -801,6 +800,8 @@ MonoBehaviour:
   m_MouseX: Mouse X
   m_MouseY: Mouse Y
   m_MouseScroll: Mouse ScrollWheel
+  Walk: {fileID: 8300000, guid: 5b5e0fa259804477ea33fa1d16b56972, type: 3}
+  Run: {fileID: 8300000, guid: 777ef9c15558d4b6a8e3fed686eb337c, type: 3}
 --- !u!82 &181280132096246639
 AudioSource:
   m_ObjectHideFlags: 0
