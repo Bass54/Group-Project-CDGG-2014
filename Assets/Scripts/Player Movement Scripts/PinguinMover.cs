@@ -57,7 +57,7 @@ namespace Controller
         private EndHandling endHandling;
 
         private void Start() {
-            //EndHandling endHandling = EndHandlingObject.GetComponent<EndHandling>(); 
+            EndHandling endHandling = EndHandlingObject.GetComponent<EndHandling>(); 
         }
 
 
