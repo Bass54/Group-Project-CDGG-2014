@@ -13,9 +13,9 @@ public class BowAndArrowScript : MonoBehaviour
     }
 
     void Update() {
-        if (Input.GetKey(KeyCode.E)) {
+        if (Input.GetKeyDown(KeyCode.E)) {
             if (Arrows > 0) {
-                Instantiate(ArrowPrefab, SpawnPoint.position, SpawnPoint.rotation);;
+                Instantiate(ArrowPrefab, SpawnPoint.position, SpawnPoint.rotation);
                 Arrows--;
                 ArrowText.text = Arrows.ToString();
             }

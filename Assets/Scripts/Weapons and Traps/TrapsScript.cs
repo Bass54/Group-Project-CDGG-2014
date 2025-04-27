@@ -13,9 +13,9 @@ public class TrapsScript : MonoBehaviour
     }
 
     void Update() {
-        if (Input.GetKey(KeyCode.Q)) {
+        if (Input.GetKeyDown(KeyCode.Q)) {
             if (Traps > 0) {
-                Instantiate(TrapPrefab, SpawnPoint.position, SpawnPoint.rotation);;
+                Instantiate(TrapPrefab, SpawnPoint.position, SpawnPoint.rotation);
                 Traps--;
                 TrapText.text = Traps.ToString();
             }

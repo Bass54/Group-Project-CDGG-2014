@@ -37,7 +37,7 @@ public class GameEnding : MonoBehaviour
             EndLevel(caughtBackgroundImageCanvasGroup, true);
         }
     }
-    void EndLevel(CanvasGroup imageCanvasGroup, bool doRestart)
+    void EndLevel(CanvasGroup imageCanvasGroup, bool doResart)
     {
         m_Timer += Time.deltaTime;
         imageCanvasGroup.alpha = m_Timer / fadeDuration;
@@ -45,7 +45,7 @@ public class GameEnding : MonoBehaviour
 
         if (m_Timer > fadeDuration + displayImageDuration)
         {
-            if (doRestart)
+            if (doResart)
             {
                 SceneManager.LoadScene(0);
             }
@@ -53,12 +53,7 @@ public class GameEnding : MonoBehaviour
             {
                 Application.Quit();
             }
-        }
-    }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
+        }
     }
 }
