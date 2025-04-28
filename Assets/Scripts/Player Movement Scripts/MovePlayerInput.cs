@@ -84,6 +84,12 @@ namespace Controller
             m_Animator.SetFloat("State", m_IsRun ? 1f : 0f);
 
             AudioClip desired = null;
+
+            if (footstepSource == null || !footstepSource.enabled)
+            {
+                return;
+            }
+
             if (isMoving) desired = m_IsRun ? Run : Walk;
 
             if (desired != null)

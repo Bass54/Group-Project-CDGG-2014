@@ -16801,6 +16801,10 @@ PrefabInstance:
       propertyPath: ArrowText
       value: 
       objectReference: {fileID: 262279397}
+    - target: {fileID: 852145873825057087, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: EndHandlingObject
+      value: 
+      objectReference: {fileID: 1667657815}
     - target: {fileID: 2571598129965511113, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
       propertyPath: m_Name
       value: NewPlayer
@@ -16849,6 +16853,10 @@ PrefabInstance:
       propertyPath: TrapText
       value: 
       objectReference: {fileID: 415584994}
+    - target: {fileID: 8089382649189691490, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: EndHandlingObject
+      value: 
+      objectReference: {fileID: 1667657815}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

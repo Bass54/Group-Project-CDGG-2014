@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 public class EndHandling : MonoBehaviour
 {
     [Header("UI")]
-    [SerializeField] private GameObject DeathEndImage;
+    //[SerializeField] private GameObject DeathEndImage;
     [SerializeField] private Image DeathEndOpImage;
     [SerializeField] private Image DeathEndOpBack;
-    [SerializeField] private GameObject WinEndImage;
+    //[SerializeField] private GameObject WinEndImage;
     [SerializeField] private Image WinEndOpImage;
     [SerializeField] private Image WinEndOpBack;
     [SerializeField] private float FadeSpeed = 0.1f;
@@ -25,17 +25,17 @@ public class EndHandling : MonoBehaviour
     [SerializeField] private float ClosingDistance = 1f;
 
     void Update() {
-        if (EndScaling) {
-            opacity += FadeSpeed * Time.deltaTime;
-            if (Lose) {
-                DeathEndImage.SetActive(true);
-                SetDeathOpacity(opacity);
-            }
-            if (Win) {
-                WinEndImage.SetActive(true);
-                SetWinOpacity(opacity);
-            }
-        }
+        //if (EndScaling) {
+        //    opacity += FadeSpeed * Time.deltaTime;
+        //    if (Lose) {
+        //        DeathEndImage.SetActive(true);
+        //        SetDeathOpacity(opacity);
+        //    }
+        //    if (Win) {
+        //        WinEndImage.SetActive(true);
+        //        SetWinOpacity(opacity);
+        //    }
+        //}
 
         CheckDistance();
 
