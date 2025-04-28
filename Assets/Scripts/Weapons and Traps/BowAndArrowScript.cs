@@ -13,7 +13,11 @@ public class BowAndArrowScript : MonoBehaviour
     }
 
     void Update() {
+<<<<<<< HEAD
         if (Input.GetKeyDown(KeyCode.E)) {
+=======
+        if (Input.GetButtonDown("FireBow")) {
+>>>>>>> parent of ef19dcf (Fixed the sound)
             if (Arrows > 0) {
                 Instantiate(ArrowPrefab, SpawnPoint.position, SpawnPoint.rotation);
                 Arrows--;

@@ -1,7 +1,5 @@
 using Mono.Cecil;
-using Unity.VisualScripting;
 using UnityEngine;
-//using static Unity.VisualScripting.Round<TInput, TOutput>;
 using static UnityEngine.SpriteMask;
 
 namespace Controller
@@ -30,9 +28,8 @@ namespace Controller
         private string m_MouseScroll = "Mouse ScrollWheel";
 
         [Header("Audio")]
-        [SerializeField] private AudioSource footstepSource;
-        [SerializeField] private AudioClip Walk;
-        [SerializeField] private AudioClip Run;
+        [SerializeField] private AudioSource Walk;
+        [SerializeField] private AudioSource Run;
 
         private PinguinMover m_Mover;
         Animator m_Animator;
@@ -48,24 +45,12 @@ namespace Controller
         private void Awake()
         {
             m_Mover = GetComponent<PinguinMover>();
+            m_Animator = GetComponent<Animator>();
+            Walk = GetComponent<AudioSource>();
+            Run = GetComponent<AudioSource>();
+            Walk.loop = true;
+            Run.loop = true;
 
-            if (footstepSource == null)
-            {
-                footstepSource = gameObject.AddComponent<AudioSource>();
-                footstepSource.loop = true;
-            }
-            if (Walk == null)
-            {
-                Walk = Resources.Load<AudioClip>("Audio/Footsteps/Walking");
-            }
-            if (Run == null)
-            {
-                Run = Resources.Load<AudioClip>("Audio/Footsteps/Running");
-            }
-            if (m_Animator == null)
-            {
-                m_Animator = GetComponent<Animator>();
-            }
         }
 
         private void Update()
@@ -73,16 +58,23 @@ namespace Controller
             GatherInput();
             SetInput();
 
-            float horizontal = Input.GetAxis("Horizontal");
-            float vertical = Input.GetAxis("Vertical");
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
 
-            bool isMoving = (horizontal != 0f) || (vertical != 0f);
+            m_Target.Set(horizontal, 0f, vertical);
+            m_Target.Normalize();
+
+
+            bool hasHorizaontalINput = !Mathf.Approximately(horizontal, 0f);
+            bool hasVerticalInput = !Mathf.Approximately(vertical, 0f);
+            bool isMoving = hasHorizaontalINput || hasVerticalInput;
             m_IsRun = Input.GetKey(KeyCode.LeftShift);
 
             float speed = new Vector3(horizontal, 0f, vertical).magnitude;
             m_Animator.SetFloat("Vert", speed);
             m_Animator.SetFloat("State", m_IsRun ? 1f : 0f);
 
+<<<<<<< HEAD
             AudioClip desired = null;
 
             if (footstepSource == null || !footstepSource.enabled)
@@ -93,18 +85,25 @@ namespace Controller
             if (isMoving) desired = m_IsRun ? Run : Walk;
 
             if (desired != null)
+=======
+            if (isMoving)
+>>>>>>> parent of ef19dcf (Fixed the sound)
             {
-                if (footstepSource.clip != desired || !footstepSource.isPlaying)
+                if (m_IsRun)
                 {
-                    footstepSource.clip = desired;
-                    footstepSource.loop = true;
-                    footstepSource.Play();
+                    if (!Run.isPlaying) Run.Play();
+                    if (Walk.isPlaying) Walk.Stop();
+                }
+                else
+                {
+                    if (!Walk.isPlaying) Walk.Play();
+                    if (Run.isPlaying) Run.Stop();
                 }
             }
             else
             {
-                if (footstepSource.isPlaying)
-                    footstepSource.Stop();
+                if (Walk.isPlaying) Walk.Stop();
+                if (Run.isPlaying) Run.Stop();
             }
         }
 

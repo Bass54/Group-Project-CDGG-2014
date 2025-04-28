@@ -97,7 +97,7 @@ namespace Controller
             // Set whether the player is running (e.g., holding down Shift key)
             bool isRun = Input.GetKey(KeyCode.LeftShift);  // Run with Left Shift key
 
-            bool isJump = Input.GetKeyDown(KeyCode.Space);  // Jump with Space key
+            bool isJump = Input.GetKeyDown(KeyCode.J);  // Jump with Space key
 
             // Pass the input to the CreatureMover component (this will handle movement)
             SetInput(axis, target, isRun, isJump);  // false means not jumping here

@@ -8709,7 +8709,6 @@ GameObject:
   - component: {fileID: 1206035957}
   - component: {fileID: 1206035958}
   - component: {fileID: 1206035959}
-  - component: {fileID: 1206035960}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -8777,7 +8776,11 @@ Transform:
   m_GameObject: {fileID: 1206035953}
   serializedVersion: 2
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+<<<<<<< HEAD
   m_LocalPosition: {x: 2.2739124, y: 10.780314, z: -37.833393}
+=======
+  m_LocalPosition: {x: 2.2475023, y: 10.780314, z: -37.833393}
+>>>>>>> parent of ef19dcf (Fixed the sound)
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8880,14 +8883,6 @@ MonoBehaviour:
   targetPosition: {fileID: 1736369420}
   moveDuration: 3
   objectiveText: {fileID: 1878495018}
---- !u!81 &1206035960
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1206035953}
-  m_Enabled: 1
 --- !u!1001 &1218824423
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10057,6 +10052,84 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2400510031361712144, guid: 08a1c14a984751b4e992a4afa3974807, type: 3}
   m_PrefabInstance: {fileID: 1378533549}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1401112931 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8866761874866491165, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+  m_PrefabInstance: {fileID: 1758622348}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1401112934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401112931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45c5f86e3afaf7c4cb4577776cca4830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_WalkSpeed: 1
+  m_RunSpeed: 4
+  m_RotateSpeed: 110
+  m_Space: 1
+  m_JumpHeight: 5
+  m_IsJumping: 0
+  m_VerticalID: Vert
+  m_StateID: State
+  m_LookWeight:
+    weight: 1
+    body: 0.3
+    head: 0.7
+    eyes: 1
+  EndHandlingObject: {fileID: 0}
+--- !u!95 &1401112935
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401112931}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: be5a7892afce29a438c8214b00153288, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!143 &1401112936
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1401112931}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2.9941177
+  m_Radius: 0.5353321
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1407968841
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16797,17 +16870,60 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 298613896458153827, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 428864150662121726, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 434267357031599194, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
       propertyPath: ArrowText
       value: 
       objectReference: {fileID: 262279397}
+<<<<<<< HEAD
     - target: {fileID: 852145873825057087, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
       propertyPath: EndHandlingObject
       value: 
       objectReference: {fileID: 1667657815}
+=======
+    - target: {fileID: 717098431731283592, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1346883932118155876, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1349995595537155929, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1391722388916335052, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1825357380100152881, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852874834784619546, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+>>>>>>> parent of ef19dcf (Fixed the sound)
     - target: {fileID: 2571598129965511113, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
       propertyPath: m_Name
       value: NewPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 2571598129965511113, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2681543325727823297, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2888020160343532087, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16849,18 +16965,90 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3492818778511491359, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3801507692374366883, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
       propertyPath: TrapText
       value: 
       objectReference: {fileID: 415584994}
+<<<<<<< HEAD
     - target: {fileID: 8089382649189691490, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
       propertyPath: EndHandlingObject
       value: 
       objectReference: {fileID: 1667657815}
+=======
+    - target: {fileID: 4803900405985692452, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073509157568873913, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5214395744393524754, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6478920908448622355, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6891285403849962335, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7115314258033451782, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7776686921302018012, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287565899167553842, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8534446650672388408, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8581973267358265678, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8696273293886206261, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866761874866491165, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9107332911838325162, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9111241411993516927, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+>>>>>>> parent of ef19dcf (Fixed the sound)
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8866761874866491165, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1401112936}
+    - targetCorrespondingSourceObject: {fileID: 8866761874866491165, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1401112935}
+    - targetCorrespondingSourceObject: {fileID: 8866761874866491165, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1401112934}
   m_SourcePrefab: {fileID: 100100000, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
 --- !u!4 &1764539805 stripped
 Transform:
@@ -17523,7 +17711,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1958424045476813827, guid: 4c5b88fe27523bc4ca33a4dd63e3f122, type: 3}
       propertyPath: m_LocalPosition.x
+<<<<<<< HEAD
       value: 2.2739124
+=======
+      value: 2.2475023
+>>>>>>> parent of ef19dcf (Fixed the sound)
       objectReference: {fileID: 0}
     - target: {fileID: 1958424045476813827, guid: 4c5b88fe27523bc4ca33a4dd63e3f122, type: 3}
       propertyPath: m_LocalPosition.y

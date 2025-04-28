@@ -75,7 +75,7 @@ public class StillEnemyMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.Q)) {
+        if (other.gameObject.CompareTag("Trap")) {
             TrapTimer = TrapTimerMax;
         }
     }
