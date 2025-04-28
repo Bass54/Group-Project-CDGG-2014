@@ -14,7 +14,11 @@ public class TrapsScript : MonoBehaviour
 
     void Update() {
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (Input.GetKeyDown(KeyCode.Q)) {
+=======
+        if (Input.GetButtonDown("PlaceTrap")) {
+>>>>>>> parent of ef19dcf (Fixed the sound)
 =======
         if (Input.GetButtonDown("PlaceTrap")) {
 >>>>>>> parent of ef19dcf (Fixed the sound)

@@ -8777,7 +8777,11 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_LocalPosition: {x: 2.2739124, y: 10.780314, z: -37.833393}
+=======
+  m_LocalPosition: {x: 2.2475023, y: 10.780314, z: -37.833393}
+>>>>>>> parent of ef19dcf (Fixed the sound)
 =======
   m_LocalPosition: {x: 2.2475023, y: 10.780314, z: -37.833393}
 >>>>>>> parent of ef19dcf (Fixed the sound)
@@ -16883,11 +16887,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 262279397}
 <<<<<<< HEAD
+<<<<<<< HEAD
     - target: {fileID: 852145873825057087, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
       propertyPath: EndHandlingObject
       value: 
       objectReference: {fileID: 1667657815}
 =======
+=======
+>>>>>>> parent of ef19dcf (Fixed the sound)
     - target: {fileID: 717098431731283592, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -16912,6 +16919,9 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+<<<<<<< HEAD
+>>>>>>> parent of ef19dcf (Fixed the sound)
+=======
 >>>>>>> parent of ef19dcf (Fixed the sound)
     - target: {fileID: 2571598129965511113, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
       propertyPath: m_Name
@@ -16974,11 +16984,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 415584994}
 <<<<<<< HEAD
+<<<<<<< HEAD
     - target: {fileID: 8089382649189691490, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
       propertyPath: EndHandlingObject
       value: 
       objectReference: {fileID: 1667657815}
 =======
+=======
+>>>>>>> parent of ef19dcf (Fixed the sound)
     - target: {fileID: 4803900405985692452, guid: 663a70df9ad0b57428d6569898daa65f, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -17035,6 +17048,9 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+<<<<<<< HEAD
+>>>>>>> parent of ef19dcf (Fixed the sound)
+=======
 >>>>>>> parent of ef19dcf (Fixed the sound)
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17712,7 +17728,11 @@ PrefabInstance:
     - target: {fileID: 1958424045476813827, guid: 4c5b88fe27523bc4ca33a4dd63e3f122, type: 3}
       propertyPath: m_LocalPosition.x
 <<<<<<< HEAD
+<<<<<<< HEAD
       value: 2.2739124
+=======
+      value: 2.2475023
+>>>>>>> parent of ef19dcf (Fixed the sound)
 =======
       value: 2.2475023
 >>>>>>> parent of ef19dcf (Fixed the sound)

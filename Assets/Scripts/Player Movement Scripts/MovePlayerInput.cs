@@ -75,6 +75,7 @@ namespace Controller
             m_Animator.SetFloat("State", m_IsRun ? 1f : 0f);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
             AudioClip desired = null;
 
             if (footstepSource == null || !footstepSource.enabled)
@@ -85,6 +86,9 @@ namespace Controller
             if (isMoving) desired = m_IsRun ? Run : Walk;
 
             if (desired != null)
+=======
+            if (isMoving)
+>>>>>>> parent of ef19dcf (Fixed the sound)
 =======
             if (isMoving)
 >>>>>>> parent of ef19dcf (Fixed the sound)

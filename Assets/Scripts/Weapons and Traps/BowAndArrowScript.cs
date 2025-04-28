@@ -14,7 +14,11 @@ public class BowAndArrowScript : MonoBehaviour
 
     void Update() {
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (Input.GetKeyDown(KeyCode.E)) {
+=======
+        if (Input.GetButtonDown("FireBow")) {
+>>>>>>> parent of ef19dcf (Fixed the sound)
 =======
         if (Input.GetButtonDown("FireBow")) {
 >>>>>>> parent of ef19dcf (Fixed the sound)
