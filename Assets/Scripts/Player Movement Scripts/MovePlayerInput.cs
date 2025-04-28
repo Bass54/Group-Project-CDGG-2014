@@ -20,8 +20,8 @@ namespace Controller
         private KeyCode m_RunKey = KeyCode.LeftShift;
 
         [Header("Camera")]
-        [SerializeField]
-        private PlayerCamera m_Camera;
+        //[SerializeField]
+        //private PlayerCamera m_Camera;
         [SerializeField]
         private string m_MouseX = "Mouse X";
         [SerializeField]
@@ -41,7 +41,7 @@ namespace Controller
         private bool m_IsRun;
         private bool m_IsJump;
 
-        private Vector3 m_Target;
+        //private Vector3 m_Target;
         private Vector2 m_MouseDelta;
         private float m_Scroll;
 
@@ -108,7 +108,7 @@ namespace Controller
             m_IsRun = Input.GetKey(m_RunKey);
             m_IsJump = Input.GetButton(m_JumpButton);
 
-            m_Target = (m_Camera == null) ? Vector3.zero : m_Camera.Target;
+           // m_Target = (m_Camera == null) ? Vector3.zero : m_Camera.Target;
             m_MouseDelta = new Vector2(Input.GetAxis(m_MouseX), Input.GetAxis(m_MouseY));
             m_Scroll = Input.GetAxis(m_MouseScroll);
            
@@ -123,13 +123,13 @@ namespace Controller
         {
             if (m_Mover != null)
             {
-                m_Mover.SetInput(m_Axis, m_Target, m_IsRun, m_IsJump);
+                m_Mover.SetInput(m_Axis, m_IsRun, m_IsJump);//m_target use to b after axis
             }
 
-            if (m_Camera != null)
-            {
-                m_Camera.SetInput(m_MouseDelta, m_Scroll);
-            }
+            //if (m_Camera != null)
+            //{
+            //    m_Camera.SetInput(m_MouseDelta, m_Scroll);
+            //}
         }
     }
 }

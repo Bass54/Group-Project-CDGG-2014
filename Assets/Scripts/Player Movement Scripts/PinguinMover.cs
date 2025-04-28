@@ -92,7 +92,7 @@ namespace Controller
             Vector2 axis = new Vector2(horizontal, vertical);
 
             // Use the camera's position as the target (or another target for movement)
-            Vector3 target = Camera.main.transform.position;  // Or any other target
+            //Vector3 target = Camera.main.transform.position;  // Or any other target
 
             // Set whether the player is running (e.g., holding down Shift key)
             bool isRun = Input.GetKey(KeyCode.LeftShift);  // Run with Left Shift key
@@ -100,7 +100,7 @@ namespace Controller
             bool isJump = Input.GetKeyDown(KeyCode.Space);  // Jump with Space key
 
             // Pass the input to the CreatureMover component (this will handle movement)
-            SetInput(axis, target, isRun, isJump);  // false means not jumping here
+            SetInput(axis, isRun, isJump);  // false means not jumping here
 
 
             m_Movement.Move(Time.deltaTime, in m_Axis, m_IsRun, m_IsJumping, out var animAxis, out var isAir);
@@ -113,10 +113,10 @@ namespace Controller
             m_Animation.AnimateIK(in m_Target, m_LookWeight);
         }
 
-        public void SetInput(Vector2 axis, Vector3 target, bool isRun, bool isJump)
+        public void SetInput(Vector2 axis, bool isRun, bool isJump)
         {
             m_Axis = axis;
-            m_Target = target;
+            //m_Target = target;
             m_IsRun = isRun;
 
             if (m_Axis.sqrMagnitude > Mathf.Epsilon) // Check if there's movement input

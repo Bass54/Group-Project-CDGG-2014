@@ -407,7 +407,6 @@ MonoBehaviour:
   m_VerticalAxis: Vertical
   m_JumpButton: Jump
   m_RunKey: 304
-  m_Camera: {fileID: 0}
   m_MouseX: Mouse X
   m_MouseY: Mouse Y
   m_MouseScroll: Mouse ScrollWheel
@@ -424,8 +423,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: dc80b0da8c2aa425d9a71ced3eaa3a53, type: 3}
+  m_Resource: {fileID: 8300000, guid: dc80b0da8c2aa425d9a71ced3eaa3a53, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1176,7 +1175,6 @@ MonoBehaviour:
   m_VerticalAxis: Vertical
   m_JumpButton: Jump
   m_RunKey: 304
-  m_Camera: {fileID: 0}
   m_MouseX: Mouse X
   m_MouseY: Mouse Y
   m_MouseScroll: Mouse ScrollWheel
@@ -1193,8 +1191,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: dc80b0da8c2aa425d9a71ced3eaa3a53, type: 3}
+  m_Resource: {fileID: 8300000, guid: dc80b0da8c2aa425d9a71ced3eaa3a53, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
