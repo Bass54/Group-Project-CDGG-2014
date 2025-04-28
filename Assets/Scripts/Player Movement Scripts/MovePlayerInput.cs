@@ -1,4 +1,8 @@
+using Mono.Cecil;
+using Unity.VisualScripting;
 using UnityEngine;
+//using static Unity.VisualScripting.Round<TInput, TOutput>;
+using static UnityEngine.SpriteMask;
 
 namespace Controller
 {
@@ -25,8 +29,12 @@ namespace Controller
         [SerializeField]
         private string m_MouseScroll = "Mouse ScrollWheel";
 
+        [Header("Audio")]
+        [SerializeField] private AudioSource footstepSource;
+        [SerializeField] private AudioClip Walk;
+        [SerializeField] private AudioClip Run;
+
         private PinguinMover m_Mover;
-        AudioSource m_AudioSource;
         Animator m_Animator;
 
         private Vector2 m_Axis;
@@ -40,67 +48,65 @@ namespace Controller
         private void Awake()
         {
             m_Mover = GetComponent<PinguinMover>();
-            m_AudioSource = GetComponent<AudioSource>();
-            m_Animator = GetComponent<Animator>();
+
+            if (footstepSource == null)
+            {
+                footstepSource = gameObject.AddComponent<AudioSource>();
+                footstepSource.loop = true;
+            }
+            if (Walk == null)
+            {
+                Walk = Resources.Load<AudioClip>("Audio/Footsteps/Walking");
+            }
+            if (Run == null)
+            {
+                Run = Resources.Load<AudioClip>("Audio/Footsteps/Running");
+            }
+            if (m_Animator == null)
+            {
+                m_Animator = GetComponent<Animator>();
+            }
         }
 
         private void Update()
         {
             GatherInput();
             SetInput();
+
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
+
+            bool isMoving = (horizontal != 0f) || (vertical != 0f);
+            m_IsRun = Input.GetKey(KeyCode.LeftShift);
+
+            float speed = new Vector3(horizontal, 0f, vertical).magnitude;
+            m_Animator.SetFloat("Vert", speed);
+            m_Animator.SetFloat("State", m_IsRun ? 1f : 0f);
+
+            AudioClip desired = null;
+
+            if (footstepSource == null || !footstepSource.enabled)
+            {
+                return;
+            }
+
+            if (isMoving) desired = m_IsRun ? Run : Walk;
+
+            if (desired != null)
+            {
+                if (footstepSource.clip != desired || !footstepSource.isPlaying)
+                {
+                    footstepSource.clip = desired;
+                    footstepSource.loop = true;
+                    footstepSource.Play();
+                }
+            }
+            else
+            {
+                if (footstepSource.isPlaying)
+                    footstepSource.Stop();
+            }
         }
-
-        //private void FixedUpdate()
-        //{
-        //    float horizontal = Input.GetAxis("Horizontal");
-        //    float vertical = Input.GetAxis("Vertical");
-
-        //    m_Target.Set(horizontal, 0f, vertical);
-        //    m_Target.Normalize();
-
-
-        //    bool hasHorizaontalINput = !Mathf.Approximately(horizontal, 0f);
-        //    bool hasVerticalInput = !Mathf.Approximately(vertical, 0f);
-        //    bool isWalking = hasHorizaontalINput || hasVerticalInput;
-        //    m_Animator.SetBool("IsWalking", isWalking);
-        //    m_Animator.SetBool("IsRunning", m_IsRun);
-        //    m_Animator.SetBool("IsJumping", m_IsJump);
-
-        //    if (isWalking)
-        //    {
-        //        if (!m_AudioSource.isPlaying)
-        //        {
-        //            m_AudioSource.Play();
-        //        }
-        //    }
-        //    else if (m_IsRun)
-        //    {
-        //        if (!m_AudioSource.isPlaying)
-        //        {
-        //            m_AudioSource.Play();
-        //        }
-        //    }
-        //    else if(m_IsJump)
-        //    {
-        //        if (!m_AudioSource.isPlaying)
-        //        {
-        //            m_AudioSource.Play();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        m_AudioSource.Stop();
-        //    }
-
-        //    if (m_IsJump)
-        //    {
-        //        m_Animator.SetTrigger("Jump");
-        //    }
-        //    if (m_IsRun)
-        //    {
-        //        m_Animator.SetTrigger("Run");
-        //    }
-        //}
 
         public void GatherInput()
         {
