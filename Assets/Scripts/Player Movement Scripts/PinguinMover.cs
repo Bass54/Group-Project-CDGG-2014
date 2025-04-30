@@ -145,8 +145,8 @@ namespace Controller
                 gameWon = true;
                 Debug.Log("Game won: " + gameWon);
                 //Destroy(this.gameObject);
-                gameObject.SetActive(false);
-                PlayerFollower.DeleteFollowers();
+                //gameObject.SetActive(false);
+                //PlayerFollower.DeleteFollowers();
             }
 
             if (hit.gameObject.CompareTag("Enemy"))
@@ -154,8 +154,8 @@ namespace Controller
                 gameLost = true;
                 Debug.Log("Game Lost: " + gameLost);
                 //Destroy(this.gameObject);
-                gameObject.SetActive(false);
-                PlayerFollower.DeleteFollowers();
+                //gameObject.SetActive(false);
+                //PlayerFollower.DeleteFollowers();
 
                 if (endHandling != null)
                 {
